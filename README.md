@@ -8,4 +8,7 @@ Currently, this repository holds the following templates.
 
 There is relevant info regarding each of the applications and/or quirks regarding packaging they might have in the adequate readme.md files in each of the subdirectories.
 
-Regarding the package source files (versions and checksums), I can't always keep the versions and checksums up to date, so make sure you first check which is the newest version of the applications you'd like to package/repackage and change the `version` and `checksum` info adequately.
+Regarding the package source files (versions and checksums), I can't always keep the versions and checksums up to date, so make sure you first check which is the newest version of the applications you'd like to package/repackage and change the `version` and `checksum` info in the template accoring to what's the newest version.
+
+## How do I use this repository?
+
