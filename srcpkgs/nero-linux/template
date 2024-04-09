@@ -1,0 +1,32 @@
+# Template file for 'nero-linux'
+pkgname=nero-linux
+version=4.0.0.0
+revision=1
+archs="i686 x86_64"
+create_wrksrc=yes
+short_desc="Nero Burning ROM for Lunux"
+maintainer="MechDR <0x4e4f@gmail.com>"
+license="custom:NeroAG"
+homepage="http://nerolinux.nero.com"
+ignore_elf_files="/usr/share/nero/helpers/splash/nerosplash"
+nopie=yes
+
+case "${XBPS_TARGET_MACHINE}" in
+	i686)
+		distfiles="https://web.archive.org/web/20240117100658/http://drive.noobslab.com/data/apps/nero/nerolinux-${version}b-x86.deb"
+		checksum="0064e51ca980b15d19efd219a759c4300632d742eccf810a004f91e6717f7f23"
+		;;
+	x86_64)
+		distfiles="https://web.archive.org/web/20240117100758/http://drive.noobslab.com/data/apps/nero/nerolinux-${version}b-x86_64.deb"
+		checksum="0e0dae80416561b5e9f78d0ae9c9661bb5c5e1946002bbaad6755bba66062766"
+		;;
+esac
+
+pre_install() {
+	sed -i 's@8M1K-20C7-45CP-CAC2-XU3Z-9924-PMCP-709X@9M1K-0098-P3HL-PK6P-T6UA-1E5X-E557-8X41@g' etc/nero/config
+}
+
+do_install() {
+	vcopy usr /
+	vcopy etc /
+}
