@@ -4,3 +4,7 @@
 ocenaudio is a closed-source, cross-platform, easy to use, fast and functional audio editor. It is the ideal software for people who need to edit and analyze audio files without complications. ocenaudio also has powerful features that will please more advanced users.
 
 This software is based on Ocen Framework, a powerful library developed to simplify and standardize the development of audio manipulation and analysis applications across multiple platforms.
+
+## How do I install ocenaudio?
+
+Clone this repository and copy/paste the `srcpkgs` directory in your cloned `void-packages` repo (repository). Or, check the releases page in this repo for the latest repackaged version.
