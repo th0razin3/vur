@@ -16,7 +16,7 @@ shlib_provides="libbz2.so.1.0"
 case "${XBPS_TARGET_MACHINE}" in
 	i686)
 		distfiles="https://www.ocenaudio.com/downloads/ocenaudio_debian9_32.deb?version=v${version}>${pkgname}-${XBPS_TARGET_MACHINE}-${version}.deb"
-		checksum="4606adc1294f58949583b8fc4537d50e11e4c5b408d42bcedba127f7b2de1380"
+		checksum="ea1204e37c653210f83fa688a8044c9bf52ad74efa54f372a9926c26ed87a8e5"
 		;;
 	x86_64)
 		distfiles="https://www.ocenaudio.com/downloads/ocenaudio_debian9_64.deb?version=v${version}>${pkgname}-${XBPS_TARGET_MACHINE}-${version}.deb"
