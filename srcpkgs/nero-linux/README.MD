@@ -6,5 +6,5 @@ This is a port of the (now discontinued) Nero Burning ROM for Linux. Ahead Softw
 
 ## How do I install it?
 
-You either clone this repo and copy the `srcpkgs` directory in the `void-packages` directory and build with xbps-src (`./xbps-src pkg nero-linux`), or you download the packaged version I made from the releases page and point xbps-install to install from a local repository (`sudo xbps-src --repository /path/to/extracted/files nero-linux`). Both i686 (x86) and x86_64 (x64) versions are packaged. No other architectures are supported unfortunately.
+You either clone this repo and copy the `srcpkgs` directory in the `void-packages` directory and build with xbps-src (`./xbps-src pkg nero-linux`), or you download the packaged version I made from the releases page and point xbps-install to install from a local repository (`sudo xbps-install --repository /path/to/extracted/files nero-linux`). Both i686 (x86) and x86_64 (x64) versions are packaged. No other architectures are supported unfortunately.
 
