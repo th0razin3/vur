@@ -17,4 +17,4 @@ Clone the `void-packages` repository from [here](https://github.com/void-linux/v
 
 ## Are there any packages/repacks available?
 
-For some of the appliactions, yes, but for most, no. I will try and have repacks available for proprietery applications, but I make no promisses. I guess I'll have to make a build script through GH Actions, but I just don't have the time right now.
+For some of the appliactions, yes, but for most, no. I will try and have repacks available for proprietery applications, but I make no promisses. I guess I'll have to make a build script for GitHub Actions, but I just don't have the time right now.
