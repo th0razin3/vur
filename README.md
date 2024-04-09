@@ -18,3 +18,7 @@ Clone the `void-packages` repository from [here](https://github.com/void-linux/v
 ## Are there any packages/repacks available for download?
 
 For some of the appliactions, yes, but for most, no. I will try and have repacks available for proprietery applications, but I make no promisses. I guess I'll have to make a build script for GitHub Actions, but I just don't have the time right now.
+
+## Do you accept PRs?
+
+Yes, but please be patient. I don't check this account as regularly as I do my main. It might be a few days before I check the PR. If I see that there is interest, I'll try and check it more regularly. 
