@@ -1,2 +1,1 @@
-# vur
-th0razin3's Void Linux User Repository
+# th0razin3's Void Linux User Repository
