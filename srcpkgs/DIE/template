@@ -1,0 +1,17 @@
+# Template file for 'DIE'
+pkgname=DIE
+version=3.09
+revision=1
+build_style=cmake
+hostmakedepends="qt5-qmake qt5-host-tools"
+makedepends="qt5-devel qt5-svg-devel qt5-plugin-odbc qt5-plugin-mysql qt5-plugin-pgsql qt5-plugin-sqlite qt5-plugin-tds qt5-script-devel"
+short_desc="DIE (Detect It Easy) is a program for determining types of files"
+maintainer="MechDR <0x4e4f@gmail.com>"
+license="MIT"
+homepage="https://github.com/horsicq/Detect-It-Easy"
+distfiles="https://github.com/horsicq/DIE-engine/releases/download/${version}/die_sourcecode_${version}.tar.gz"
+checksum="eb458c5fbc3d06abf04c552ca20e0d0cfcf36540c2f0962feb79e2f4ea65bc12"
+
+post_install() {
+	vlicense LICENSE
+}
