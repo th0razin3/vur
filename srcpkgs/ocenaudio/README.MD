@@ -7,4 +7,4 @@ This software is based on Ocen Framework, a powerful library developed to simpli
 
 ## How do I install ocenaudio?
 
-Clone this repository and copy/paste the `srcpkgs` directory in your cloned `void-packages` repo (repository). Or, check the releases page in this repo for the latest repackaged version.
+Clone this repository and copy/paste the `srcpkgs` directory in your locally cloned `void-packages` repo (repository). Or, check the releases page in this repo for the latest repackaged version.
