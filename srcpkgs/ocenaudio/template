@@ -1,7 +1,8 @@
 # Template file for 'ocenaudio'
 #
 # You need to add "libbz2.so.1.0 bzip2-1.0.5_1" (without the quotes)
-# in a new line in common/shlibs.
+# in a new line in common/shlibs. Afterwards, comment it out because
+# it might interfere with other builds from xbps-packages.
 #
 pkgname=ocenaudio
 version=3.13.7
