@@ -3,4 +3,4 @@ This is my personal Void Linux user repository. Most xbps-src templates work, so
 
 Currently, this repository holds the following templates.
 - Nero Linux 4 (Nero Burning ROM)
-- 
+- Viber
