@@ -9,8 +9,8 @@ Currently, this repository holds the following templates.
 
 There is relevant info regarding each of the applications and/or quirks regarding packaging they might have in the adequate readme.md files in each of the subdirectories.
 
-Regarding the package source files (versions and checksums), I can't always keep the versions and checksums up to date, so make sure you first check which is the newest version of the applications you'd like to package/repackage and change the `version` and `checksum` info in the template accoring to what's the newest.
+Regarding the package source files (versions and checksums), I can't always keep the versions and checksums up to date, so make sure you first check which is the newest version of the applications you'd like to package/repackage and change the `version` and `checksum` info in the template according to what's the newest.
 
 ## How do I use this repository?
 
-Clone the void-packages repository from [here](https://github.com/void-linux/void-packages), then you clone this repository and copy/paste the content into the `void-packages` repository and then just package the application you like with ./xbps-src pkg foo-bar`.
+Clone the `void-packages` repository from [here](https://github.com/void-linux/void-packages), then you clone this repository and copy/paste the content into the `void-packages` repository and then just package the application you like with ./xbps-src pkg foo-bar`.
