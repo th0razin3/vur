@@ -20,7 +20,7 @@ case "${XBPS_TARGET_MACHINE}" in
 		;;
 	x86_64)
 		distfiles="https://www.ocenaudio.com/downloads/ocenaudio_debian9_64.deb?version=v${version}>${pkgname}-${XBPS_TARGET_MACHINE}-${version}.deb"
-		checksum="074f8dc8567d734963cd83099b7ef8d53a68c454b4668ea1c7385a7581687d20"
+		checksum="518ce45530b2aa7aeeed03f1b2c146c3428b5e8f25b2c55152ebfb0f2633fb8d"
 		;;
 esac
 
