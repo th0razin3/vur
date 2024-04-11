@@ -2,22 +2,9 @@
 
 Detect It Easy, or abbreviated "DIE" is a program for determining types of files.
 
-Many programs of the kind (PEID, PE tools) allow to use third-party signatures.
-Unfortunately, those signatures scan only bytes by the pre-set mask, and it is
-not possible to specify additional parameters. As the result, false triggering
-often occur. More complicated algorithms are usually strictly set in the program
-itself. Hence, to add a new complex detect one needs to recompile the entire
-project. No one, except the authors themselves, can change the algorithm of
-a detect. As time passes, such programs lose relevance without the constant support.
+Many programs of the kind (PEID, PE tools) allow to use third-party signatures. Unfortunately, those signatures scan only bytes by the pre-set mask, and it is not possible to specify additional parameters. As the result, false triggering often occur. More complicated algorithms are usually strictly set in the program itself. Hence, to add a new complex detect one needs to recompile the entire project. No one, except the authors themselves, can change the algorithm of a detect. As time passes, such programs lose relevance without the constant support.
 
-Detect It Easy has totally open architecture of signatures. You can easily
-add your own algorithms of detects or modify those that already exist. This
-is achieved by using scripts. The script language is very similar to JavaScript
-and any person, who understands the basics of programming, will understand easily
-how it works. Possibly, someone may decide the scripts are working very slow.
-Indeed, scripts run slower than compiled code, but, thanks to the good optimization
-of Script Engine, this doesn't cause any special inconvenience. The possibilities
-of open architecture compensate these limitations.
+Detect It Easy has totally open architecture of signatures. You can easily add your own algorithms of detects or modify those that already exist. This is achieved by using scripts. The script language is very similar to JavaScript and any person, who understands the basics of programming, will understand easily how it works. Possibly, someone may decide the scripts are working very slow. Indeed, scripts run slower than compiled code, but, thanks to the good optimization of Script Engine, this doesn't cause any special inconvenience. The possibilities of open architecture compensate these limitations.
 
 DIE exists in three versions. Basic version ("die"), Lite version ("diel") and
 console version ("diec"). All the three use the same signatures, which are located
@@ -31,3 +18,7 @@ which lie in the corresponding folder. Currently the program defines the followi
 - ELF executable files Linux
 - MACH executable files Mac OS
 - Binary all other files
+
+## How do I install it?
+
+You can use the prebuilt binaries in the releases page, or you can build your onwn. Download this repository (repo), copy/paste the `srcpkgs` folder in 
