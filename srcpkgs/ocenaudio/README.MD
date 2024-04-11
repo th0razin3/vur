@@ -1,6 +1,6 @@
 # ocenaudio for Void Linux
 
-https://github.com/th0razin3/vur/assets/158844949/054b0953-95a6-4092-a6f0-f5b7c7d7c20a
+<p align="center"><img src="https://github.com/th0razin3/vur/assets/158844949/420fa8e7-55de-4d6a-b15b-cb0e84525a8e"></p>
 
 ![ocenaudio](https://github.com/th0razin3/vur/assets/158844949/420fa8e7-55de-4d6a-b15b-cb0e84525a8e)
 
