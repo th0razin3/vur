@@ -2,8 +2,6 @@
 
 <p align="center"><img src="https://github.com/th0razin3/vur/assets/158844949/212215fb-48fa-44a9-a002-61b3d94b89c0"></p>
 
-![DIE](https://github.com/th0razin3/vur/assets/158844949/212215fb-48fa-44a9-a002-61b3d94b89c0)
-
 Detect It Easy, or abbreviated "DIE" is a program for determining types of files.
 
 Many programs of the kind (PEID, PE tools) allow to use third-party signatures. Unfortunately, those signatures scan only bytes by the pre-set mask, and it is not possible to specify additional parameters. As the result, false triggering often occur. More complicated algorithms are usually strictly set in the program itself. Hence, to add a new complex detect one needs to recompile the entire project. No one, except the authors themselves, can change the algorithm of a detect. As time passes, such programs lose relevance without the constant support.
