@@ -1,6 +1,6 @@
 # ocenaudio for Void Linux
 
-<p align="center"><img src="https://github.com/th0razin3/vur/assets/158844949/420fa8e7-55de-4d6a-b15b-cb0e84525a8e"></p>
+<p align="center"><img src="https://gitea.com/th0razin3/vur/raw/branch/main/srcpkgs/ocenaudio/ocenaudio.png"></p>
 
 ocenaudio is a closed-source, cross-platform, easy to use, fast and functional audio editor. It is the ideal software for people who need to edit and analyze audio files without complications. ocenaudio also has powerful features that will please more advanced users.
 
