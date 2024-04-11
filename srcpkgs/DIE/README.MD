@@ -16,4 +16,4 @@ DIE exists in three versions. Basic version ("die"), Lite version ("diel") and c
 
 ## How do I install it?
 
-You can use the prebuilt binaries in the releases page, or you can build your onwn. Download this repository (repo), copy/paste the `srcpkgs` folder in 
+You can use the prebuilt binaries in the releases page, or you can build your own. Download this repository (repo), copy/paste the `srcpkgs` folder in your local `void-packages` cloned repo (from (here)https://github.com/void-linux/void-packages])
