@@ -4,13 +4,25 @@ version=1.5.1
 revision=1
 build_style=meson
 hostmakedepends="glib gettext pkg-config vala"
-makedepends="glib geoclue2-devel geocode-glib-libsoup2-devel glib-devel
- granite-devel gst-plugins-bad1-devel gstreamer1-devel gtk+3-devel
- json-glib-devel libgee08-devel libsoup-devel"
+makedepends="geoclue2-devel geocode-glib-libsoup2-devel glib-devel libglib-devel
+ granite-devel gst-plugins-bad1-devel gstreamer1-devel gtk+3-devel json-glib-devel
+ libgee08-devel libsoup-devel"
 depends="gst-plugins-good1 gst-libav"
 short_desc="GNU/Linux app to discover and play internet radio stations"
 maintainer="th0razin3 <th0razin3@proton.me>"
 license="GPL-3.0-or-later"
 homepage="https://github.com/louis77/tuner"
-distfiles="https://github.com/louis77/tuner/archive/refs/tags/${version}.tar.gz"
+# In case the original project and releases are deleted from GitHub, uncomment the
+# line below and comment out the line after that.
+#distfiles="https://web.archive.org/web/20240412222507if_/https://codeload.github.com/louis77/tuner/tar.gz/refs/tags/${version}>tuner-${version}.tar.gz"
+distfiles="https://github.com/louis77/tuner/archive/refs/tags/${version}.tar.gz>tuner-${version}.tar.gz"
 checksum=bbb5e7c97da1ee495651d85aca33c2fe58daba81906ae247e12b6a41b1ed7592
+
+post_extract() {
+	# Patch for meson >= 1.3.0
+	sed -i 's@pkgconfig@pkg-config@g' com.github.louis77.tuner.yml
+	# Cosmetic version patches
+	sed -i 's@1.5.0@1.5.1@g' data/com.github.louis77.tuner.appdata.xml.in
+	sed -i 's@1.5.0@1.5.1@g' src/Application.vala
+	sed -i 's@1.5.0@1.5.1@g' meson.build
+}
