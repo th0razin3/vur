@@ -1,0 +1,2 @@
+# Tuner for Void Linux
+
