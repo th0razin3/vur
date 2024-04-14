@@ -1,0 +1,1 @@
+Pale Moon (GTK3) for Void Linux
