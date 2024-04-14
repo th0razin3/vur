@@ -1,0 +1,1 @@
+# Pale Moon (GTK2) for Void Linux
