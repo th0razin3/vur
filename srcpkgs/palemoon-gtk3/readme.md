@@ -4,4 +4,4 @@
 
 ## How do I install it?
 
-Clone this repository, copy/paste the `srcpkgs` directory in your locally cloned `void-packages` repo (repository) and build (repackage) the application with `./xbps-src pkg palemoon-gtk2`. You can then install Pale Moon with `sudo xbps-install --repository hostdir/binpkgs palemoon-gtk2`. Or, check the releases page in this repo for the latest repackaged version. You can install the Void Linux repack with `sudo xbps-install --repository /path/to/extracted/files palemoon-gtk2`.
+Clone this repository, copy/paste the `srcpkgs` directory in your locally cloned `void-packages` repo (repository) and build (repackage) the application with `./xbps-src pkg palemoon-gtk3`. You can then install Pale Moon with `sudo xbps-install --repository hostdir/binpkgs palemoon-gtk3`. Or, check the releases page in this repo for the latest repackaged version. You can install the Void Linux repack with `sudo xbps-install --repository /path/to/extracted/files palemoon-gtk3`.
