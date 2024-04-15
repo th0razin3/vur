@@ -12,4 +12,4 @@ Clone this repository, copy/paste the `srcpkgs` directory in your locally cloned
 
 ## A note for the Pale Moon developers, if they happen to stumble upon this repack
 
-This is just a repack, not a rebuild of Pale Moon. No third party libraries have been used to make this repack. I'm using Steven Pusser's Debian builds to make this repack. Nothing has been changed in the binaries, except the distribution (distro) this repack targets, i.e. Void Linux.
+This is just a repack, not a rebuild of Pale Moon. No third party libraries have been added to this repack. I'm using Steven Pusser's Debian builds to make this repack. Nothing has been changed in the binaries, except the distribution (distro) this repack targets, i.e. Void Linux.
