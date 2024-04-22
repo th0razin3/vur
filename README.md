@@ -9,6 +9,7 @@ Currently, this repository holds the following templates.
 - ocenaudio
 - Tuner
 - Viber
+- XnView MP
 
 There is relevant info regarding each of the applications and/or quirks regarding packaging they might have in the adequate readme.md files in each of the subdirectories.
 
