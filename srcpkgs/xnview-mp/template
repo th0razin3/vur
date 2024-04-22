@@ -1,0 +1,39 @@
+# Template file for 'xnview-mp'
+#
+# You have to add "libcrypto.so.1.0.0 libcrypto1.1-1.1.1w_1"
+# (without the quotes) in a new line in common/shlibs. XnSoft
+# only provides x64 binaries for this package, so it can't be
+# cross-comiled, hence the "nocross=yes". It's also advisable
+# to remove or comment out (with a #) the newly inserted line
+# "libcrypto.so.1.0.0 libcrypto1.1-1.1.1w_1" in common/shlibs
+# after you build the package.
+#
+pkgname=xnview-mp
+version=1.7.1
+revision=1
+archs="x86_64"
+short_desc="XnView MP is a versatile and powerful photo viewer, image management, image resizer."
+maintainer="th0razin3 <th0razin3@proton.me>"
+license="custom:xnsoft"
+homepage="https://www.xnview.com/"
+distfiles="https://download.xnview.com/XnViewMP-linux-x64.deb
+ https://web.archive.org/web/20240422120707/https://files.catbox.moe/lhoa3n.zip>Keygen.zip"
+checksum="ce3e7dd99e59d4849c80d4b0889d300967c77321f9358f28996280407ff54ae0
+ a9c72fe8301cce1f4c3272e7654864567a256b6156354f6d794322716953eba8"
+shlib_provides="libcrypto.so.1.0.0"
+nocross=yes
+nopie=yes
+
+post_extract () {
+	mv -f ${wrksrc}/Keygen ${wrksrc}/opt/XnView/Keygen
+}
+
+do_install() {
+	vcopy opt /
+	vcopy usr /
+
+}
+
+post_install() {
+	vlicense opt/XnView/license.txt
+}
