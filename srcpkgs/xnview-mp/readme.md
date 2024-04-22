@@ -1,0 +1,1 @@
+# XnView MP for Void Linux
