@@ -3,7 +3,9 @@
 # You have to add "libtiff.so.5 tiff-4.5.1_1" (without the quotes)
 # in a new line in common/shlibs. Viber only provides x64 binaries
 # for this package, so it can't be cross-comiled, hence the
-# "nocross=yes".
+# "nocross=yes".  It's also advisable to remove or comment out
+# (with a #) the newly inserted line "libtiff.so.5 tiff-4.5.1_1"
+# in common/shlibs after you build the package.
 #
 pkgname=viber
 version=1.0.0
