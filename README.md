@@ -6,6 +6,7 @@ Currently, this repository holds the following templates.
 
 - DIE (Detect It Easy)
 - Nero Linux 4 (Nero Burning ROM for Linux)
+- numen
 - ocenaudio
 - Tuner
 - Viber
