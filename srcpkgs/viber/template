@@ -16,7 +16,7 @@ maintainer="th0razin3 <th0razin3@proton.me>"
 license=custom:"Viber"
 homepage="https://www.viber.com/"
 distfiles="https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb"
-checksum="e3b13a7a67886321b48e277b3aaae7d8210ab5bf6742139c905b443017af6460"
+checksum="46b39b98ddb540e9b99e4d11d9abe0087d2e96b7e2508a363e7c985af41a195c"
 shlib_provides="libtiff.so.5"
 nocross=yes
 
