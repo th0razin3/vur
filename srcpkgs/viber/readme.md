@@ -12,7 +12,7 @@ Basically, `xbps-src` doesn't allow repackaging or buidling without a version nu
 
 You might also notice that this themplate downloads the .deb file twice. This is completely normal: the first time is for the version number, the second time is for the actual repackaging of the application. I could have probably made the template download the .deb file only once, but that would require a lot more work and... well, bandwidth is cheap nowadays, so... sorry, but I did the best I could in an afternoon's work.
 
-Oh, and Viber is an AMD64 (x86_64) only application. Don't look at me, I'm as surprised as you... apparently Rakuten don't care about any other architecture... go bug them about it.
+Oh, and Viber is an AMD64 (x86_64) only application. Don't look at me, I'm as surprised as you... apparently Rakuten doesn't care about any other architecture... go bug them about it.
 
 ## How do I install it?
 
