@@ -16,7 +16,7 @@ Oh, and Viber is an AMD64 (x86_64) only application. Don't look at me, I'm as su
 
 ## How do I install it?
 
-Clone this repository, copy/paste the `srcpkgs` directory in your locally cloned `void-packages` repo (repository) and build (repackage) the application with `./xbps-src pkg vibe`. You can then install ocenaudio with `sudo xbps-install --repository hostdir/binpkgs viber`. I don't repackage Viber, it's way too big at the time (they now have to build/package binaries for Wayland and X.org in a single package, so that takes a lot of space).
+Clone this repository, copy/paste the `srcpkgs` directory in your locally cloned `void-packages` repo (repository) and build (repackage) the application with `./xbps-src pkg vibe`. You can then install Viber with `sudo xbps-install --repository hostdir/binpkgs viber`. I don't repackage Viber, it's way too big at the time (they now have to build/package binaries for Wayland and X.org in a single package, so that takes a lot of space).
 
 ## How do I know if Viber is out of date?
 
