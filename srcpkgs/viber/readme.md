@@ -8,9 +8,9 @@ Viber, or Rakuten Viber, is a cross-platform voice over IP (VoIP) and instant me
 
 This Void Linux template is a dirty hack. Basically, `xbps-src` doesn't allow repackaging or buidling without a version number. Viber is closed source, so the best we could do is repackage. But, there's a problem. There is no version numbering on the website or in the filename of the dwnloaded .deb file (we're repacakaging from a Debian/Ubuntu package). So, this template basically doesn't conform to the `xbps-src` template standard (hence, the dirty hack). The version number is extracted from the .deb file on the fly, while `xbps-src` is running, which is not what `xbps-src` was meant to do. Hence, this template could stop working at any point in new releases of `xbps-src`. For the time being, it works. You will might also notice that this themplate downloads the .deb file twice. This is completely normal: the first time is for the version number, the second time is for the actual repackaging of the application. I could have probably made the template download the .deb file only once, but that would require a lot more work and... well, bandwidth is cheap nowadays, so... sorry, but I did the best I could in an afternoon's work.
 
-## How do I build this package?
+## How do I install it?
 
-You just clone this repo or download it as a zip file, extract the content, copy/paste the `srcpkgs` directory in your `void-packages` directory, build it using xbps-src (`./xbps-src pkg viber`) and then install it with xbps-install (`sudo xbps-install --repository hostdir/binpkgs viber`).
+Clone this repository, copy/paste the `srcpkgs` directory in your locally cloned `void-packages` repo (repository) and build (repackage) the application with `./xbps-src pkg vibe`. You can then install ocenaudio with `sudo xbps-install --repository hostdir/binpkgs viber`. 
 
 ## How do I know if Viber is out of date?
 
