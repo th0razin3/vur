@@ -1,6 +1,6 @@
 # Viber for Void Linux
 
-Make sure you read the comments in the template file.
+<p align="center"><img src="https://codeberg.org/th0razin3/vur/raw/branch/main/srcpkgs/palemoon-gtk3/palemoon.png"></p>
 
 ## Why make a Viber xbps-src template?
 
