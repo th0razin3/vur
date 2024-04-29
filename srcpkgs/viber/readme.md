@@ -4,21 +4,19 @@
 
 Viber, or Rakuten Viber, is a cross-platform voice over IP (VoIP) and instant messaging (IM) software application owned by Japanese multinational company Rakuten, provided as freeware for the Google Android, iOS, Microsoft Windows, Apple macOS and Linux platforms. Users are registered and identified through a cellular telephone number, although the service is accessible on desktop platforms without needing mobile connectivity. In addition to instant messaging it allows users to exchange media such as images and videos.
 
-## Why make a Viber xbps-src template?
+## Notes
 
-I know there is the official AppImage and the unofficial Flatpak, but I just prefer to have one package manager and let that one handle everything.
+This Void Linux template is a dirty hack. Basically, `xbps-src` doesn't allow repackaging or buidling without a version number. Viber is closed source, so the best we could do is repackage. But, there's a problem. There is no version numbering on the website or in the filename of the dwnloaded .deb file (we're repacakaging from a Debian/Ubuntu package). So, this template basically doesn't conform to the `xbps-src` template standard (hence, the dirty hack). The version number is extracted from the .deb file on the fly, while `xbps-src` is running, which is not what `xbps-src` was meant to do. Hence, this template could stop working at any point in new releases of `xbps-src`. For the time being, it works. You will might also notice that this themplate downloads the .deb file twice. This is completely normal: the first time is for the version number, the second time is for the actual repackaging of the application. I could have probably made the template download the .deb file only once, but that would require a lot more work and... well, bandwidth is cheap nowadays, so... sorry, but I did the best I could in an afternoon's work.
 
 ## How do I build this package?
 
 You just clone this repo or download it as a zip file, extract the content, copy/paste the `srcpkgs` directory in your `void-packages` directory, build it using xbps-src (`./xbps-src pkg viber`) and then install it with xbps-install (`sudo xbps-install --repository hostdir/binpkgs viber`).
 
-## Why isn't this in the official repo?
+## How do I know if Viber is out of date?
 
-Viber doesn't use version numbering. Basically, you really have no idea what version of Viber you're running (unless you check the binary). XBPS uses version numbering and revisions to decide whether a package needs updating or not. So, the maintainers wouldn't allow something like this in the official repo or in xbps-src.
+You don't... the moment it stops working, that means it's probably out of date (there may be an indicator somewhere in the UI, I have't checked or noticed to be honest). Run this template again in xbps
 
-## So, how am I supposed to update Viber?
 
-You'd have to either up the version number (say, from 1.0.0 to 1.0.1) or the revision (from 1 to 2) in the template... or just uninstall Viber, repackage it and install it again.
 
 ## How do I know if Viber is out of date?
 
