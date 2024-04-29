@@ -1,17 +1,9 @@
 # Template file for 'viber'
-#
-# You have to add "libtiff.so.5 tiff-4.5.1_1" (without the quotes)
-# in a new line in common/shlibs. Viber only provides x64 binaries
-# for this package, so it can't be cross-comiled, hence the
-# "nocross=yes".  It's also advisable to remove or comment out
-# (with a #) the newly inserted line "libtiff.so.5 tiff-4.5.1_1"
-# in common/shlibs after you build the package.
-#
 pkgname=viber
-version=1.0.0
 revision=1
 archs="x86_64"
-short_desc="Viber is a cross-platform VoIP and IM software application."
+hostmakedepends="tar xz"
+short_desc="Viber is a cross-platform VoIP and IM software application"
 maintainer="th0razin3 <th0razin3@proton.me>"
 license=custom:"Viber"
 homepage="https://www.viber.com/"
@@ -20,7 +12,44 @@ checksum="46b39b98ddb540e9b99e4d11d9abe0087d2e96b7e2508a363e7c985af41a195c"
 shlib_provides="libtiff.so.5"
 nocross=yes
 
+if [ -f "xbps-src" ]; then
+	if [ -d "masterdir-${XBPS_TARGET_MACHINE}/tmp" ]; then
+		cd "masterdir-${XBPS_TARGET_MACHINE}/tmp"
+		echo "Getting Viber version, this might take a minute..."
+		xbps-fetch "${distfiles}"
+		ar x --output=. viber.deb
+		xz -d control.tar.xz
+		tar -xf control.tar
+		tmpver=$(awk -F": " '/Version/ {print $NF}' control)
+		cd ../../
+		echo "${tmpver}">"masterdir-${XBPS_TARGET_MACHINE}/tmp/ver.txt"
+	else
+		echo "You need to run \"./xbps-src binary-bootstrap\" first, then run \"./xbps-src pkg ${pkgname}\"."
+		exit
+	fi
+fi
+
+if [ ! -d "/builddir" ]; then
+	version=$(cat "masterdir-${XBPS_TARGET_MACHINE}/tmp/ver.txt")
+else
+	version=$(cat "/tmp/ver.txt")
+fi
+
+post_extract() {
+	mkdir -p temp
+	ar x --output=temp "${XBPS_SRCDISTDIR}/${pkgname}-${version}/viber.deb"
+	xz -d temp/control.tar.xz
+	tar -C temp -xf temp/control.tar
+	iconv -f ISO-8859-1 -t UTF-8 -o LICENSE temp/copyright
+	rm -rf temp
+}
+
 do_install() {
         vcopy usr /
         vcopy opt /
+	vlicense LICENSE
+}
+
+do_clean() {
+	rm -rf /tmp/*
 }
