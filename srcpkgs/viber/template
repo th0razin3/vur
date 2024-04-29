@@ -51,5 +51,5 @@ do_install() {
 }
 
 do_clean() {
-	rm -rf /tmp/*
+	rm -rf "/tmp/"*
 }
