@@ -5,6 +5,7 @@ This is my personal Void Linux user repository. Most xbps-src templates work, so
 Currently, this repository holds the following templates.
 
 - DIE (Detect It Easy)
+- Fastfetch
 - Nero Linux 4 (Nero Burning ROM for Linux)
 - numen
 - ocenaudio
