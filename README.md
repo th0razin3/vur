@@ -26,4 +26,4 @@ For some of the appliactions, yes, but for most, no. I will try and have builds/
 
 ## Do you accept PRs?
 
-Yes, but please be patient. I don't check this account as regularly as I do my main. It might be a few days before I check the PR. If I see that there is interest, I'll try and check it more regularly.
+Yes, but please be patient. I don't check this account as regularly as I do my main. It might be a few days before I check the PR. If I see that there is interest, I'll try and check it more regularly. Oh, and the main repo is on [codeberg.org](https://codeberg.org/th0razin3/vur), the rest are just push mirrors.
