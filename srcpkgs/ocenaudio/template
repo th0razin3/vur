@@ -1,11 +1,10 @@
 # Template file for 'ocenaudio'
 #
 # You need to add "libbz2.so.1.0 bzip2-1.0.5_1" (without the quotes)
-# in a new line in common/shlibs. Afterwards, comment it out because
-# it might interfere with other builds from xbps-packages.
+# in a new line in common/shlibs.
 #
 pkgname=ocenaudio
-version=3.13.7
+version=3.13.8
 revision=1
 archs="i686 x86_64"
 short_desc="ocenaudio is a cross-platform, easy to use audio editor."
@@ -17,11 +16,11 @@ shlib_provides="libbz2.so.1.0"
 case "${XBPS_TARGET_MACHINE}" in
 	i686)
 		distfiles="https://www.ocenaudio.com/downloads/ocenaudio_debian9_32.deb?version=v${version}>${pkgname}-${XBPS_TARGET_MACHINE}-${version}.deb"
-		checksum="ea1204e37c653210f83fa688a8044c9bf52ad74efa54f372a9926c26ed87a8e5"
+		checksum="48e02fa3fb4cc307650d9b430c5aab6e4141474f91dea6a64ac0d237a225eda7"
 		;;
 	x86_64)
 		distfiles="https://www.ocenaudio.com/downloads/ocenaudio_debian9_64.deb?version=v${version}>${pkgname}-${XBPS_TARGET_MACHINE}-${version}.deb"
-		checksum="518ce45530b2aa7aeeed03f1b2c146c3428b5e8f25b2c55152ebfb0f2633fb8d"
+		checksum="18a361a36c55e8b73853962ce23f99886c44f22ae895cad3b6d3773c6d52d948"
 		;;
 esac
 
