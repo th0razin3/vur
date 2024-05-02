@@ -4,7 +4,7 @@
 
 Tuner is a minimalist radio station player. Discover and Listen to your favourite internet radio stations. Tuner uses the community-driven radio station catalog [radio-browser.info](https://www.radio-browser.info/).
 
-For more info, please visit [codeberg.org/tuner/tuner](https://web.archive.org/web/20240414125106/https://codeberg.org/tuner/tuner)
+For more info, please visit [codeberg.org/tuner/tuner](https://web.archive.org/web/20240414125106/https://codeberg.org/tuner/tuner).
 
 ## How do I install it?
 
