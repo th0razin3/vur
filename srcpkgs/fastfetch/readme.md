@@ -6,7 +6,7 @@ Fastfetch is a neofetch-like tool for fetching system information and displaying
 
 ## Notes
 
-The binaries in the releases are built with no additional dependencies listed [here](https://github.com/fastfetch-cli/fastfetch/wiki/Dependencies). So, basically, these binaries don't have any of the "extended" features that Fastfetch has (like showing the distro's logo in the terminal with an actual image). If you don't like that, build Fastfetch from source with your own preference.
+The binaries in the releases are built with no additional dependencies listed [here](https://github.com/fastfetch-cli/fastfetch/wiki/Dependencies). So, basically, these binaries don't have any of the "extended" features that Fastfetch has (like showing the distro's logo in the terminal with an actual image). If you don't like that, build Fastfetch from source with your own preferences (build args).
 
 ## How do I install it?
 
