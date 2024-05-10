@@ -1,0 +1,51 @@
+# Template file for 'OpenBoard'
+pkgname=OpenBoard
+version=1.7.0
+revision=1
+build_style=qmake
+hostmakedepends="qt5-qmake qt5-host-tools quazip-devel poppler-devel"
+makedepends="qt5-tools-devel qt5-declarative-devel qt5-svg-devel qt5-multimedia-devel
+ qt5-webengine-devel qt5-location-devel qt5-webchannel-devel quazip-qt5-devel
+ poppler-cpp-devel ffmpeg-devel libgomp-devel libva-devel alsa-lib-devel SDL-devel
+ x264-devel libvpx-devel libvorbis-devel libtheora-devel opus-devel lame-devel
+ fdk-aac-devel libass-devel"
+short_desc="OpenBoard is an open source cross-platform interactive white board application designed primarily for use in schools."
+maintainer="th0razin3 <th0razin3@proton.me>"
+license="GPL-3.0"
+homepage="https://openboard.ch/"
+distfiles="https://github.com/${pkgname}-org/${pkgname}/archive/refs/tags/v${version}.tar.gz"
+checksum="03b5e6f728339528b8580542302f1d80567f814b10cb94b83df9c996eca125a3"
+
+pre_install() {
+	mkdir -p ${DESTDIR}/usr/bin
+	# Make .desktop file.
+	echo "[Desktop Entry]" > ${pkgname}.desktop
+	echo "Version=${version}" >> ${pkgname}.desktop
+	echo "Encoding=UTF-8" >> ${pkgname}.desktop
+	echo "Name=${pkgname}" >> ${pkgname}.desktop
+	echo "Comment=OpenBoard, an interactive white board application." >> ${pkgname}.desktop
+	echo "Exec=${pkgname} %f" >> ${pkgname}.desktop
+	echo "Icon=/opt/${pkgname}/${pkgname}.png" >> ${pkgname}.desktop
+	echo "StartupNotify=true" >> ${pkgname}.desktop
+	echo "Terminal=false" >> ${pkgname}.desktop
+	echo "Type=Application" >> ${pkgname}.desktop
+	echo "MimeType=application/ubz" >> ${pkgname}.desktop
+	echo "Categories=Education;" >> ${pkgname}.desktop
+}
+
+do_install() {
+	vinstall build/linux/release/product/${pkgname} 0755 /opt/${pkgname}
+	vinstall resources/images/${pkgname}.png 0644 /opt/${pkgname}
+	vinstall ${pkgname}.desktop 0644 /usr/share/applications
+	ln -sf /opt/${pkgname}/${pkgname} ${DESTDIR}/usr/bin/${pkgname}
+	vcopy resources/customizations /opt/${pkgname}
+	vcopy resources/i18n /opt/${pkgname}
+	rm -f ${DESTDIR}/opt/${pkgname}/i18n/Localizable.strings
+	vcopy resources/etc /opt/${pkgname}
+	vcopy resources/linux /opt/${pkgname}
+	mv -f ${DESTDIR}/opt/${pkgname}/linux/* ${DESTDIR}/opt/${pkgname}/etc
+	rm -rf ${DESTDIR}/opt/${pkgname}/linux
+	rm -f ${DESTDIR}/opt/${pkgname}/etc/run.sh
+	vcopy resources/library /opt/${pkgname}
+	vcopy resources/startupHints /opt/${pkgname}
+}
