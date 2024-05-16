@@ -7,7 +7,7 @@ short_desc="Viber is a cross-platform VoIP and IM software application"
 maintainer="th0razin3 <th0razin3@proton.me>"
 license=custom:"Viber"
 homepage="https://www.viber.com/"
-distfiles="https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb"
+distfiles="https://download.cdn.viber.com/cdn/desktop/Linux/${pkgname}.deb"
 checksum="46b39b98ddb540e9b99e4d11d9abe0087d2e96b7e2508a363e7c985af41a195c"
 shlib_provides="libtiff.so.5"
 nocross=yes
@@ -17,7 +17,7 @@ if [ -f "xbps-src" ]; then
 		cd "masterdir-${XBPS_TARGET_MACHINE}/tmp"
 		echo "Getting Viber version, this might take a minute..."
 		xbps-fetch "${distfiles}"
-		ar x --output=. viber.deb
+		ar x --output=. ${pkgname}.deb
 		xz -d control.tar.xz
 		tar -xf control.tar
 		tmpver=$(awk -F": " '/Version/ {print $NF}' control)
