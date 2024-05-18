@@ -59,6 +59,9 @@ post_extract () {
 	sed -i 's@/opt/XnView/xnview.png@/opt/XnView-MP/xnview.png@g' ${wrksrc}/usr/share/applications/${pkgname}.desktop
 	sed -i 's@Exec=xnview@Exec=XnView-MP@g' ${wrksrc}/usr/share/applications/${pkgname}.desktop
 	cp -f ${wrksrc}/opt/${pkgname}/license.txt ${wrksrc}/LICENSE
+	echo "[Registration]" > ${wrksrc}/opt/${pkgname}/xnview.ini
+	echo "LicenseName=XnView MP" >> ${wrksrc}/opt/${pkgname}/xnview.ini
+	echo "LicenseCode=521995331" >> ${wrksrc}/opt/${pkgname}/xnview.ini
 }
 
 do_install() {
