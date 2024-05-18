@@ -1,0 +1,72 @@
+# Template file for 'xnview-mp'
+pkgname=XnView-MP
+revision=1
+archs="x86_64"
+short_desc="XnView MP is a versatile and powerful photo viewer, image management, image resizer."
+maintainer="th0razin3 <th0razin3@proton.me>"
+license="custom:XnSoft"
+homepage="https://www.xnview.com/"
+distfiles="https://download.xnview.com/XnViewMP-linux-x64.deb>${pkgname}.deb
+ https://web.archive.org/web/20240422120707/https://files.catbox.moe/lhoa3n.zip>Keygen.zip"
+checksum="ce3e7dd99e59d4849c80d4b0889d300967c77321f9358f28996280407ff54ae0
+ a9c72fe8301cce1f4c3272e7654864567a256b6156354f6d794322716953eba8"
+shlib_provides="libcrypto.so.1.0.0"
+nocross=yes
+nopie=yes
+
+if [ -f "xbps-src" ]; then
+	if [ -d "masterdir-${XBPS_TARGET_MACHINE}/tmp" ]; then
+		cd "masterdir-${XBPS_TARGET_MACHINE}/tmp"
+		echo "Getting XnView MP version, this might take a minute..."
+		xbps-fetch "https://download.xnview.com/XnViewMP-linux-x64.deb>${pkgname}.deb"
+		ar x --output=. ${pkgname}.deb
+		gzip -d control.tar.gz
+		tar -xf control.tar
+		tmpver=$(awk -F": " '/Version/ {print $NF}' control)
+		cd ../../
+		echo "${tmpver}">"masterdir-${XBPS_TARGET_MACHINE}/tmp/ver.txt"
+	else
+		echo "You need to run \"./xbps-src binary-bootstrap\" first, then run \"./xbps-src pkg ${pkgname}\"."
+		exit
+	fi
+fi
+
+if [ ! -d "/builddir" ]; then
+	version=$(cat "masterdir-${XBPS_TARGET_MACHINE}/tmp/ver.txt")
+else
+	version=$(cat "/tmp/ver.txt")
+fi
+
+post_extract () {
+	mv -f ${wrksrc}/Keygen ${wrksrc}/opt/XnView/Keygen
+	mkdir -p ${wrksrc}/opt/${pkgname}
+	mv -f ${wrksrc}/opt/XnView/* ${wrksrc}/opt/${pkgname}
+	rm -rf ${wrksrc}/opt/XnView
+	mv -f ${wrksrc}/opt/${pkgname}/XnView ${wrksrc}/opt/${pkgname}/${pkgname}
+	mv -f ${wrksrc}/opt/${pkgname}/XnView.desktop ${wrksrc}/opt/${pkgname}/${pkgname}.desktop
+	sed -i 's@/opt/XnView@/opt/XnView-MP@g' ${wrksrc}/opt/${pkgname}/${pkgname}.desktop
+	sed -i 's@GenericName=XnViewMP@GenericName=XnView MP@g' ${wrksrc}/opt/${pkgname}/${pkgname}.desktop
+	sed -i 's@Name=XnView Multi Platform@Name=XnView MP@g' ${wrksrc}/opt/${pkgname}/${pkgname}.desktop
+	sed -i 's@xnview.sh@XnView-MP.sh@g' ${wrksrc}/opt/${pkgname}/${pkgname}.desktop
+	mv -f ${wrksrc}/opt/${pkgname}/xnview.sh ${wrksrc}/opt/${pkgname}/${pkgname}.sh
+	sed -i 's@XnView@XnView-MP@g' ${wrksrc}/opt/${pkgname}/${pkgname}.sh
+	mv -f ${wrksrc}/usr/bin/xnview ${wrksrc}/usr/bin/${pkgname}
+	sed -i 's@XnView@XnView-MP@g' ${wrksrc}/usr/bin/${pkgname}
+	mv -f ${wrksrc}/usr/share/applications/XnView.desktop ${wrksrc}/usr/share/applications/${pkgname}.desktop
+	sed -i 's@GenericName=XnViewMP@GenericName=XnView MP@g' ${wrksrc}/usr/share/applications/${pkgname}.desktop
+	sed -i 's@Name=XnView Multi Platform@Name=XnView MP@g' ${wrksrc}/usr/share/applications/${pkgname}.desktop
+	sed -i 's@TryExec=xnview@TryExec=XnView-MP@g' ${wrksrc}/usr/share/applications/${pkgname}.desktop
+	sed -i 's@/opt/XnView/xnview.png@/opt/XnView-MP/xnview.png@g' ${wrksrc}/usr/share/applications/${pkgname}.desktop
+	sed -i 's@Exec=xnview@Exec=XnView-MP@g' ${wrksrc}/usr/share/applications/${pkgname}.desktop
+	cp -f ${wrksrc}/opt/${pkgname}/license.txt ${wrksrc}/LICENSE
+}
+
+do_install() {
+	vcopy opt /
+	vcopy usr /
+
+}
+
+post_install() {
+	vlicense LICENSE
+}
