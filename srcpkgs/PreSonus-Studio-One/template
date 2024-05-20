@@ -1,0 +1,36 @@
+# Template file for 'PreSonus-Studio-One'
+pkgname=PreSonus-Studio-One
+version=6.6.1.99821
+revision=1
+archs="x86_64"
+short_desc="PresSonus Studio One is a digital audio workstation (DAW) application, used to create, record, mix and master music and other audio."
+maintainer="th0razin3 <th0razin3@proton.me>"
+license="custom:PreSonus"
+homepage="https://www.presonus.com/en/studio-one.html"
+distfiles="https://archive.org/download/presonus-studio-one-6.6.1-build-99821/PreSonus%20Studio%20One%206.6%20%28x86_64%29.deb>${pkgname}-${version}.deb
+ https://web.archive.org/web/20240520082109/http://archive.ubuntu.com/ubuntu/pool/main/libu/libunistring/libunistring5_1.1-2build1_amd64.deb
+ https://web.archive.org/web/20240520085202/http://archive.ubuntu.com/ubuntu/pool/main/i/icu/libicu74_74.2-1ubuntu3_amd64.deb"
+checksum="897370745f2b85aeb92c2a6789469f34f64b49771e7bcda41ed5391457564342
+ 78acc4c141a499e0c1e4cc47ca8e9082996f3972662c4d92337669ecc9b0a519
+ d29c97a21a3e3254731cfac186e4d4e611e5e67d2c9a0430f6acfbd9acaefa2e"
+nocross=yes
+
+post_extract() {
+	mkdir -p ${wrksrc}/opt/PreSonus/StudioOne
+	mv -f "${wrksrc}/opt/PreSonus/Studio One 6/"* ${wrksrc}/opt/PreSonus/StudioOne
+	mv -f "${wrksrc}/opt/PreSonus/StudioOne/Studio One" ${wrksrc}/opt/PreSonus/StudioOne/StudioOne
+	rm -rf "${wrksrc}/opt/PreSonus/Studio One 6"
+	mkdir -p ${wrksrc}/usr/bin
+	ln -sf /opt/PreSonus/StudioOne/StudioOne ${wrksrc}/usr/bin/${pkgname}
+	sed -i 's@/opt/PreSonus/Studio\\\\\\sOne\\\\\\s6/Studio\\\\\\sOne@PreSonus-Studio-One@g' ${wrksrc}/usr/share/applications/com.presonus.studioapp.desktop
+	sed -i 's@Studio One 6@PreSonus Studio One@g' ${wrksrc}/usr/share/applications/com.presonus.studioapp.desktop
+	cp "${wrksrc}/opt/PreSonus/StudioOne/license/EULA.txt" ${wrksrc}/LICENSE
+	mv -f ${wrksrc}/usr/lib/x86_64-linux-gnu/{libunistring.so.{5,5.0.0},libicudata.so.{74,74.2},libicuuc.so.{74,74.2}} ${wrksrc}/opt/PreSonus/StudioOne
+	rm -rf ${wrksrc}/usr/lib
+}
+
+do_install() {
+	vcopy opt /
+	vcopy usr /
+	vlicense LICENSE
+}
