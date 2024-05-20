@@ -11,6 +11,7 @@ Currently, this repository holds the following templates.
 - ocenaudio
 - OpenBoard
 - Pale Moon (GTK2 and GTK3)
+- PreSonus Studio One
 - Tuner
 - Viber
 - XnView MP
