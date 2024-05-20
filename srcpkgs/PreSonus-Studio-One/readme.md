@@ -6,7 +6,7 @@ Studio One is a digital audio workstation (DAW) application, used to create, rec
 
 ## Notes
 
-The target OS for this version of Studio One is Ubuntu 24.04, which is why some libraries had to be taken from Ubuntu's repository (it doesn't work with the versions Void has in it's repos, tested). Also, Studio One is a Wayland only application, so tough luck for people still on X11. It does work through `weston` though. Install `weston-x11` in Void, run it from the terminal, run a Wayland terminal and type `PreSonus-Studio-One` in it, this will run Studio One.
+The target OS for this version of Studio One is Ubuntu 24.04, which is why some libraries had to be taken from Ubuntu's repository (it doesn't work with the versions Void has in it's repos, tested). Also, Studio One is a Wayland only application, so tough luck for people still on X11. It does work through `weston` though. Install `weston-x11`, run it from the terminal, run a Wayland terminal and type `PreSonus-Studio-One` in it, this will run Studio One.
 
 ## How do I install it?
 
