@@ -1,4 +1,4 @@
-# Template file for 'xnview-mp'
+# Template file for 'XnView-MP'
 pkgname=XnView-MP
 revision=1
 archs="x86_64"
