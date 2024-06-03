@@ -1,21 +1,22 @@
-# Template file for 'viber'
-pkgname=viber
+# Template file for 'Viber'
+pkgname=Viber
 revision=1
 archs="x86_64"
 hostmakedepends="tar xz"
-short_desc="Viber is a cross-platform VoIP and IM software application"
+short_desc="Viber is a cross-platform VoIP and IM software application."
 maintainer="th0razin3 <th0razin3@proton.me>"
-license=custom:"Viber"
+license="custom:Viber"
 homepage="https://www.viber.com/"
-distfiles="https://download.cdn.viber.com/cdn/desktop/Linux/${pkgname}.deb"
+distfiles="https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb>${pkgname}.deb"
 checksum="46b39b98ddb540e9b99e4d11d9abe0087d2e96b7e2508a363e7c985af41a195c"
 shlib_provides="libtiff.so.5"
 nocross=yes
 
+# Get Viber verson.
 if [ -f "xbps-src" ]; then
 	if [ -d "masterdir-${XBPS_TARGET_MACHINE}/tmp" ]; then
 		cd "masterdir-${XBPS_TARGET_MACHINE}/tmp"
-		echo "Getting Viber version, this might take a minute..."
+		echo "Getting ${pkgname} version, this might take a minute..."
 		xbps-fetch "${distfiles}"
 		ar x --output=. ${pkgname}.deb
 		xz -d control.tar.xz
@@ -36,12 +37,22 @@ else
 fi
 
 post_extract() {
+	# Get the license file from the .deb package.
 	mkdir -p temp
 	ar x --output=temp "${XBPS_SRCDISTDIR}/${pkgname}-${version}/${pkgname}.deb"
 	xz -d temp/control.tar.xz
 	tar -C temp -xf temp/control.tar
 	iconv -f ISO-8859-1 -t UTF-8 -o LICENSE temp/copyright
 	rm -rf temp
+	# Moving files so that the installation dir in /opt matches the package name.
+	mkdir -p opt/${pkgname}
+	mv -f opt/viber/* opt/${pkgname}
+	rm -rf opt/viber
+	# Making a link to /usr/bin so that Viber can be run from the terminal.
+	mkdir -p usr/bin
+	ln -sf /opt/${pkgname}/${pkgname} usr/bin
+	# Correcting the path to the binary in the .desktop file.
+	sed -i 's@/opt/viber/Viber@/opt/Viber/Viber@g' usr/share/applications/viber.desktop
 }
 
 do_install() {
