@@ -1,6 +1,6 @@
 # Viber for Void Linux
 
-<p align="center"><img src="https://codeberg.org/th0razin3/vur/raw/branch/main/srcpkgs/viber/viber.png"></p>
+<p align="center"><img src="https://codeberg.org/th0razin3/vur/raw/branch/main/srcpkgs/Viber/Viber.png"></p>
 
 Viber, or Rakuten Viber, is a cross-platform voice over IP (VoIP) and instant messaging (IM) software application owned by Japanese multinational company Rakuten, provided as freeware for the Google Android, iOS, Microsoft Windows, Apple macOS and Linux platforms. Users are registered and identified through a cellular telephone number, although the service is accessible on desktop platforms without needing mobile connectivity. In addition to instant messaging it allows users to exchange media such as images and videos.
 
