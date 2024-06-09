@@ -1,0 +1,1 @@
+# Amarok for Void Linux
