@@ -1,0 +1,37 @@
+# Template file for 'amarok'
+pkgname=amarok
+version=3.0.0
+revision=1
+build_style=cmake
+configure_args="-DCMAKE_INSTALL_PREFIX=${DESTDIR}/usr -DCMAKE_BUILD_TYPE=debugfull"
+hostmakedepends="glib-devel extra-cmake-modules pkg-config gettext-devel python3
+ qt5-tools-devel kcoreaddons-devel kpackage-devel"
+makedepends="qt5-declarative-devel qt5-quickcontrols2-devel qt5-webengine-devel
+ qt5-webchannel-devel qt5-location-devel qt5-plugin-odbc qt5-plugin-mysql qt5-plugin-pgsql
+ qt5-plugin-sqlite qt5-plugin-tds qt5-svg-devel libglvnd-devel taglib-devel taglib-extras-devel
+ libmariadbclient-devel ffmpeg-devel libgpod-devel gdk-pixbuf-devel libmygpo-qt-devel
+ libmtp-devel libcurl-devel loudmouth-devel fftw-devel liblastfm-qt5-devel karchive-devel
+ attica-devel kcodecs-devel kconfig-devel kconfigwidgets-devel kcrash-devel kdbusaddons-devel
+ kdeclarative-devel kdnssd-devel kdoctools-devel kglobalaccel-devel kguiaddons-devel ki18n-devel
+ kiconthemes-devel kcmutils-devel kio-devel knewstuff-devel knotifications-devel ksolid-devel
+ ktexteditor-devel threadweaver-devel kwidgetsaddons-devel kwindowsystem-devel"
+depends="phonon-qt5-backend-gstreamer breeze-icons"
+short_desc="Amarok is a free, cross-platform, versatile, powerful and feature-rich music player."
+maintainer="th0razin3 <th0razin3@proton.me>"
+license="GPL-2.0-or-later"
+homepage="https://amarok.kde.org/"
+distfiles="https://download.kde.org/stable/${pkgname}/${version}/${pkgname}-${version}.tar.xz"
+checksum="14a87678305fad76a0a1daca555a6775ffa642e5ebbcccecd91f497093992c1c"
+shlib_provides="libKF5DNSSD.so.5"
+
+post_extract() {
+	if [ ! -z "${CROSS_BUILD}" ]; then
+		ln -sf ${XBPS_CROSS_BASE}/usr/include/taglib-extras /usr/include/taglib-extras
+	fi
+}
+
+do_clean() {
+	if [ ! -z "${CROSS_BUILD}" ]; then
+		rm -f /usr/include/taglib-extras
+	fi
+}
