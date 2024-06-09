@@ -4,6 +4,7 @@ This is my personal Void Linux user repository. Most xbps-src templates work, so
 
 Currently, this repository holds the following templates.
 
+- Amarok
 - DIE (Detect It Easy)
 - ~~Fastfetch~~ (Currently in Void repos)
 - Nero Linux 4 (Nero Burning ROM for Linux)
