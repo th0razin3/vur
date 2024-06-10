@@ -16,7 +16,7 @@ Oh, and Viber is an AMD64 (x86_64) only application. Don't look at me, I'm as su
 
 ## How do I install it?
 
-Clone this repository, copy/paste the `srcpkgs` directory in your locally cloned `void-packages` repo (repository) and build (repackage) the application with `./xbps-src pkg vibe`. You can then install Viber with `sudo xbps-install --repository hostdir/binpkgs viber`. I don't repackage Viber, it's way too big at the time (they now have to build/package binaries for Wayland and X.org in a single package, so that takes a lot of space).
+You can use the prebuilt binaries in the releases page, or you can build your own. Download this repository (repo), copy/paste the `srcpkgs` folder in your local `void-packages` cloned repo (from [here](https://github.com/void-linux/void-packages)), run `./xbps-src pkg Viber` and wait for the building process to end. Afterwards, you can install the application with `sudo xbps-install --repository hostdir/binpkgs Viber`. If you've donwloaded the prebuilt packages from the releases page, you can install the application with `sudo xbps-install --repository /path/to/extracted/files Viber`.
 
 ## How do I know if Viber is out of date?
 
