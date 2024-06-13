@@ -14,7 +14,7 @@ license="GPL-3.0-or-later"
 homepage="https://github.com/louis77/tuner"
 # In case the original project and releases are deleted from GitHub, uncomment the
 # line below and comment out the line after that.
-#distfiles="https://web.archive.org/web/20240412222507if_/https://codeload.github.com/louis77/tuner/tar.gz/refs/tags/${version}>tuner-${version}.tar.gz"
+#distfiles="https://web.archive.org/web/20240412222507if_/https://codeload.github.com/louis77/${pkgname}/tar.gz/refs/tags/${version}>${pkgname}-${version}.tar.gz"
 distfiles="https://github.com/louis77/${pkgname}/archive/refs/tags/${version}.tar.gz>${pkgname}-${version}.tar.gz"
 checksum="bbb5e7c97da1ee495651d85aca33c2fe58daba81906ae247e12b6a41b1ed7592"
 
