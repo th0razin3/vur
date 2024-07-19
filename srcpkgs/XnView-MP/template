@@ -8,7 +8,7 @@ license="custom:XnSoft"
 homepage="https://www.xnview.com/"
 distfiles="https://download.xnview.com/XnViewMP-linux-x64.deb>${pkgname}.deb
  https://web.archive.org/web/20240422120707/https://files.catbox.moe/lhoa3n.zip>Keygen.zip"
-checksum="ce3e7dd99e59d4849c80d4b0889d300967c77321f9358f28996280407ff54ae0
+checksum="b735bd48a2cbba1c7e4097facdb7ee169c17a8eeccc48cd346cd19d9745ccc49
  a9c72fe8301cce1f4c3272e7654864567a256b6156354f6d794322716953eba8"
 shlib_provides="libcrypto.so.1.0.0"
 nocross=yes
