@@ -6,7 +6,7 @@ Currently, this repository holds the following templates.
 
 - Amarok
 - DIE (Detect It Easy)
-- ~~Fastfetch~~ (Currently in Void repos)
+- ~~Fastfetch~~ (currently in Void repos)
 - Nero Linux 4 (Nero Burning ROM for Linux)
 - numen
 - ocenaudio
