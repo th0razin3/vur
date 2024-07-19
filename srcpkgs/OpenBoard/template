@@ -1,9 +1,9 @@
 # Template file for 'OpenBoard'
 pkgname=OpenBoard
-version=1.7.0
+version=1.7.1
 revision=1
 build_style=qmake
-hostmakedepends="qt5-qmake qt5-host-tools quazip-devel poppler-devel"
+hostmakedepends="qt5-qmake qt5-host-tools quazip-qt5-devel poppler-devel"
 makedepends="qt5-tools-devel qt5-declarative-devel qt5-svg-devel qt5-multimedia-devel
  qt5-webengine-devel qt5-location-devel qt5-webchannel-devel quazip-qt5-devel
  poppler-cpp-devel ffmpeg-devel libgomp-devel libva-devel alsa-lib-devel SDL-devel
@@ -14,7 +14,15 @@ maintainer="th0razin3 <th0razin3@proton.me>"
 license="GPL-3.0"
 homepage="https://openboard.ch/"
 distfiles="https://github.com/${pkgname}-org/${pkgname}/archive/refs/tags/v${version}.tar.gz"
-checksum="03b5e6f728339528b8580542302f1d80567f814b10cb94b83df9c996eca125a3"
+checksum="5c9fcb54bc1598b4b7026e6ecca07137660dd3d45bda472a5710acf600a2a22f"
+
+pre_configure() {
+	# Fix QuaZip library names and include paths.
+	sed -i 's@LIBS += -lquazip5@LIBS += -lquazip1-qt5@g' ${wrksrc}/OpenBoard.pro
+	sed -i 's@LIBS += -lquazip6@LIBS += -lquazip1-qt6@g' ${wrksrc}/OpenBoard.pro
+	sed -i 's@"/usr/include/quazip5"@"/usr/include/quazip5"\n        INCLUDEPATH += "/usr/include/QuaZip-Qt5-1.4/quazip"@g' ${wrksrc}/OpenBoard.pro
+	sed -i 's@"/usr/include/quazip6"@"/usr/include/quazip6"\n        INCLUDEPATH += "/usr/include/QuaZip-Qt6-1.4/quazip"@g' ${wrksrc}/OpenBoard.pro
+}
 
 pre_install() {
 	mkdir -p ${DESTDIR}/usr/bin
