@@ -7,9 +7,10 @@ short_desc="Viber is a cross-platform VoIP and IM software application."
 maintainer="th0razin3 <th0razin3@proton.me>"
 license="custom:Viber"
 homepage="https://www.viber.com/"
-distfiles="https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb>${pkgname}.deb"
-checksum="46b39b98ddb540e9b99e4d11d9abe0087d2e96b7e2508a363e7c985af41a195c"
-shlib_provides="libtiff.so.5"
+distfiles="https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb>${pkgname}.deb
+ https://web.archive.org/web/20240731093616/http://ftp.us.debian.org/debian/pool/main/z/zvbi/libzvbi0_0.2.41-1_amd64.deb"
+checksum="f561e22365a5b2012108f92b42802e9e617a9526f69f9460409dbeb1d9d24a13
+ 264828c32fcf8a611ac549a989d92880e778d7f2f0046ce9544b834dc6fd56a3"
 nocross=yes
 
 # Get Viber verson.
@@ -17,7 +18,7 @@ if [ -f "xbps-src" ]; then
 	if [ -d "masterdir-${XBPS_TARGET_MACHINE}/tmp" ]; then
 		cd "masterdir-${XBPS_TARGET_MACHINE}/tmp"
 		echo "Getting ${pkgname} version, this might take a minute..."
-		xbps-fetch "${distfiles}"
+		xbps-fetch "https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb>${pkgname}.deb"
 		ar x --output=. ${pkgname}.deb
 		xz -d control.tar.xz
 		tar -xf control.tar
@@ -53,6 +54,9 @@ post_extract() {
 	ln -sf /opt/${pkgname}/${pkgname} usr/bin
 	# Correcting the path to the binary in the .desktop file.
 	sed -i 's@/opt/viber/Viber@/opt/Viber/Viber@g' usr/share/applications/viber.desktop
+	# Moving files from /usr/lib to /opt/Viber/lib.
+	mv -f usr/lib/x86_64-linux-gnu/* opt/Viber/lib
+	rm -rf usr/lib
 }
 
 do_install() {
