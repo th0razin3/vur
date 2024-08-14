@@ -1,11 +1,11 @@
 # Template file for 'amarok'
 pkgname=amarok
-version=3.0.0
+version=3.1.0
 revision=1
 build_style=cmake
 configure_args="-DCMAKE_INSTALL_PREFIX=${DESTDIR}/usr -DCMAKE_BUILD_TYPE=debugfull"
 hostmakedepends="glib-devel extra-cmake-modules pkg-config gettext-devel python3
- qt5-tools-devel kcoreaddons-devel kpackage-devel"
+ qt5-tools-devel kcoreaddons-devel kpackage-devel taglib-extras-devel"
 makedepends="qt5-declarative-devel qt5-quickcontrols2-devel qt5-webengine-devel
  qt5-webchannel-devel qt5-location-devel qt5-plugin-odbc qt5-plugin-mysql qt5-plugin-pgsql
  qt5-plugin-sqlite qt5-plugin-tds qt5-svg-devel libglvnd-devel taglib-devel taglib-extras-devel
@@ -21,17 +21,5 @@ maintainer="th0razin3 <th0razin3@proton.me>"
 license="GPL-2.0-or-later"
 homepage="https://amarok.kde.org/"
 distfiles="https://download.kde.org/stable/${pkgname}/${version}/${pkgname}-${version}.tar.xz"
-checksum="14a87678305fad76a0a1daca555a6775ffa642e5ebbcccecd91f497093992c1c"
+checksum="c97b9967fa8f15b8e9f4dfb66184cac6a7ec9dc665a105bc5168d8e720fe16eb"
 shlib_provides="libKF5DNSSD.so.5"
-
-post_extract() {
-	if [ ! -z "${CROSS_BUILD}" ]; then
-		ln -sf ${XBPS_CROSS_BASE}/usr/include/taglib-extras /usr/include/taglib-extras
-	fi
-}
-
-do_clean() {
-	if [ ! -z "${CROSS_BUILD}" ]; then
-		rm -f /usr/include/taglib-extras
-	fi
-}
