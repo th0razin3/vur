@@ -1,34 +1,22 @@
 # Template file for 'ocenaudio'
-#
-# You need to add "libbz2.so.1.0 bzip2-1.0.5_1" (without the quotes)
-# in a new line in common/shlibs.
-#
 pkgname=ocenaudio
-version=3.13.8
+version=3.14.1
 revision=1
-archs="i686 x86_64"
+archs="x86_64"
 short_desc="ocenaudio is a cross-platform, easy to use audio editor."
 maintainer="th0razin3 <th0razin3@proton.me>"
 license="custom:ocenaudio"
 homepage="https://www.ocenaudio.com/"
+distfiles="https://www.ocenaudio.com/downloads/ocenaudio_debian12.deb?version=v${version}>${pkgname}-${XBPS_TARGET_MACHINE}-${version}.deb"
+checksum="df086d46e5fe5f9d0ffb8dba6163bad7c0f12475fc0f5046988c2f358a4b5f2d"
 shlib_provides="libbz2.so.1.0"
-
-case "${XBPS_TARGET_MACHINE}" in
-	i686)
-		distfiles="https://www.ocenaudio.com/downloads/ocenaudio_debian9_32.deb?version=v${version}>${pkgname}-${XBPS_TARGET_MACHINE}-${version}.deb"
-		checksum="48e02fa3fb4cc307650d9b430c5aab6e4141474f91dea6a64ac0d237a225eda7"
-		;;
-	x86_64)
-		distfiles="https://www.ocenaudio.com/downloads/ocenaudio_debian9_64.deb?version=v${version}>${pkgname}-${XBPS_TARGET_MACHINE}-${version}.deb"
-		checksum="18a361a36c55e8b73853962ce23f99886c44f22ae895cad3b6d3773c6d52d948"
-		;;
-esac
 
 do_install() {
 	vcopy usr /
 	vcopy opt /
+	cp opt/ocenaudio/bin/ocenaudio_license.txt LICENSE
 }
 
 post_install() {
-	vlicense opt/ocenaudio/bin/ocenaudio_license.txt
+	vlicense LICENSE
 }
