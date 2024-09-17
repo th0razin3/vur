@@ -6,6 +6,8 @@ short_desc="XnView MP is a versatile and powerful photo viewer, image management
 maintainer="th0razin3 <th0razin3@proton.me>"
 license="custom:XnSoft"
 homepage="https://www.xnview.com/"
+_disturl=https://download.xnview.com/XnViewMP-linux-x64.deb
+_keygenurl=https://web.archive.org/web/20240422120707/https://files.catbox.moe/lhoa3n.zip
 shlib_provides="libcrypto.so.1.0.0"
 nocross=yes
 nopie=yes
@@ -15,7 +17,7 @@ if [ -f xbps-src ]; then
 	mkdir -p ${XBPS_SRCDISTDIR}/${pkgname}-Temp
 	cd ${XBPS_SRCDISTDIR}/${pkgname}-Temp
 	echo "Getting XnView MP version, this might take a minute..."
-	xbps-fetch "https://download.xnview.com/XnViewMP-linux-x64.deb>${pkgname}.${XBPS_TARGET_MACHINE}.deb"
+	xbps-fetch "${_disturl}>${pkgname}.${XBPS_TARGET_MACHINE}.deb"
 	ar x ${pkgname}.${XBPS_TARGET_MACHINE}.deb
 	bsdtar -xf control.tar.gz
 	tmpver=$(awk -F": " '/Version/ {print $NF}' control)
@@ -30,7 +32,7 @@ do_fetch() {
 	mkdir -p ${XBPS_SRCDISTDIR}/${pkgname}-${version}
 	mv -f /${XBPS_SRCDISTDIR}/${pkgname}-Temp/${pkgname}.${XBPS_TARGET_MACHINE}.deb ${XBPS_SRCDISTDIR}/${pkgname}-${version}/${pkgname}-${version}.${XBPS_TARGET_MACHINE}.deb
 	cd ${XBPS_SRCDISTDIR}/${pkgname}-${version}
-	xbps-fetch "https://web.archive.org/web/20240422120707/https://files.catbox.moe/lhoa3n.zip>Keygen.zip"
+	xbps-fetch "${_keygenurl}>Keygen.zip"
 }
 
 do_extract() {
