@@ -6,36 +6,41 @@ short_desc="XnView MP is a versatile and powerful photo viewer, image management
 maintainer="th0razin3 <th0razin3@proton.me>"
 license="custom:XnSoft"
 homepage="https://www.xnview.com/"
-distfiles="https://download.xnview.com/XnViewMP-linux-x64.deb>${pkgname}.deb
- https://web.archive.org/web/20240422120707/https://files.catbox.moe/lhoa3n.zip>Keygen.zip"
-checksum="b735bd48a2cbba1c7e4097facdb7ee169c17a8eeccc48cd346cd19d9745ccc49
- a9c72fe8301cce1f4c3272e7654864567a256b6156354f6d794322716953eba8"
 shlib_provides="libcrypto.so.1.0.0"
 nocross=yes
 nopie=yes
 
-if [ -f "xbps-src" ]; then
-	if [ -d "masterdir-${XBPS_TARGET_MACHINE}/tmp" ]; then
-		cd "masterdir-${XBPS_TARGET_MACHINE}/tmp"
-		echo "Getting XnView MP version, this might take a minute..."
-		xbps-fetch "https://download.xnview.com/XnViewMP-linux-x64.deb>${pkgname}.deb"
-		ar x --output=. ${pkgname}.deb
-		gzip -d control.tar.gz
-		tar -xf control.tar
-		tmpver=$(awk -F": " '/Version/ {print $NF}' control)
-		cd ../../
-		echo "${tmpver}">"masterdir-${XBPS_TARGET_MACHINE}/tmp/ver.txt"
-	else
-		echo "You need to run \"./xbps-src binary-bootstrap\" first, then run \"./xbps-src pkg ${pkgname}\"."
-		exit
-	fi
+if [ -f xbps-src ]; then
+	rm -rf ${XBPS_SRCDISTDIR}/${pkgname}-Temp
+	mkdir -p ${XBPS_SRCDISTDIR}/${pkgname}-Temp
+	cd ${XBPS_SRCDISTDIR}/${pkgname}-Temp
+	echo "Getting XnView MP version, this might take a minute..."
+	xbps-fetch "https://download.xnview.com/XnViewMP-linux-x64.deb>${pkgname}.${XBPS_TARGET_MACHINE}.deb"
+	ar x ${pkgname}.${XBPS_TARGET_MACHINE}.deb
+	bsdtar -xf control.tar.gz
+	tmpver=$(awk -F": " '/Version/ {print $NF}' control)
+	echo ${tmpver}>${XBPS_SRCDISTDIR}/${pkgname}-Temp/ver.txt
 fi
 
-if [ ! -d "/builddir" ]; then
-	version=$(cat "masterdir-${XBPS_TARGET_MACHINE}/tmp/ver.txt")
-else
-	version=$(cat "/tmp/ver.txt")
-fi
+version=$(cat ${XBPS_SRCDISTDIR}/${pkgname}-Temp/ver.txt)
+
+do_fetch() {
+	rm -rf ${XBPS_SRCDISTDIR}/${pkgname}-${version}
+	rm -rf ${wrksrc}
+	mkdir -p ${XBPS_SRCDISTDIR}/${pkgname}-${version}
+	mv -f /${XBPS_SRCDISTDIR}/${pkgname}-Temp/${pkgname}.${XBPS_TARGET_MACHINE}.deb ${XBPS_SRCDISTDIR}/${pkgname}-${version}/${pkgname}-${version}.${XBPS_TARGET_MACHINE}.deb
+	cd ${XBPS_SRCDISTDIR}/${pkgname}-${version}
+	xbps-fetch "https://web.archive.org/web/20240422120707/https://files.catbox.moe/lhoa3n.zip>Keygen.zip"
+}
+
+do_extract() {
+	bsdtar -xf ${XBPS_SRCDISTDIR}/${pkgname}-${version}/Keygen.zip
+	ar x ${XBPS_SRCDISTDIR}/${pkgname}-${version}/${pkgname}-${version}.${XBPS_TARGET_MACHINE}.deb
+	bsdtar -xf data.tar.xz
+	rm -f control.tar.gz
+	rm -f data.tar.xz
+	rm -f debian-binary
+}
 
 post_extract () {
 	mv -f ${wrksrc}/Keygen ${wrksrc}/opt/XnView/Keygen
@@ -64,7 +69,6 @@ post_extract () {
 do_install() {
 	vcopy opt /
 	vcopy usr /
-
 }
 
 post_install() {
@@ -72,5 +76,5 @@ post_install() {
 }
 
 do_clean() {
-	rm -rf /tmp/*
+	rm -rf ${XBPS_SRCDISTDIR}/${pkgname}-Temp
 }
