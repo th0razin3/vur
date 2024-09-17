@@ -30,7 +30,7 @@ do_fetch() {
 	rm -rf ${XBPS_SRCDISTDIR}/${pkgname}-${version}
 	rm -rf ${wrksrc}
 	mkdir -p ${XBPS_SRCDISTDIR}/${pkgname}-${version}
-	mv -f /${XBPS_SRCDISTDIR}/${pkgname}-Temp/${pkgname}.${XBPS_TARGET_MACHINE}.deb ${XBPS_SRCDISTDIR}/${pkgname}-${version}/${pkgname}-${version}.${XBPS_TARGET_MACHINE}.deb
+	mv -f ${XBPS_SRCDISTDIR}/${pkgname}-Temp/${pkgname}.${XBPS_TARGET_MACHINE}.deb ${XBPS_SRCDISTDIR}/${pkgname}-${version}/${pkgname}-${version}.${XBPS_TARGET_MACHINE}.deb
 	cd ${XBPS_SRCDISTDIR}/${pkgname}-${version}
 	xbps-fetch "${_keygenurl}>Keygen.zip"
 }
@@ -71,9 +71,6 @@ post_extract () {
 do_install() {
 	vcopy opt /
 	vcopy usr /
-}
-
-post_install() {
 	vlicense LICENSE
 }
 
