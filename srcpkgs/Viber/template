@@ -2,48 +2,61 @@
 pkgname=Viber
 revision=1
 archs="x86_64"
-hostmakedepends="tar xz"
 short_desc="Viber is a cross-platform VoIP and IM software application."
 maintainer="th0razin3 <th0razin3@proton.me>"
 license="custom:Viber"
 homepage="https://www.viber.com/"
-distfiles="https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb>${pkgname}.deb
- https://web.archive.org/web/20240731093616/http://ftp.us.debian.org/debian/pool/main/z/zvbi/libzvbi0_0.2.41-1_amd64.deb"
-checksum="f561e22365a5b2012108f92b42802e9e617a9526f69f9460409dbeb1d9d24a13
- 264828c32fcf8a611ac549a989d92880e778d7f2f0046ce9544b834dc6fd56a3"
+_disturl=https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb
+_liburl=https://web.archive.org/web/20240731093616/http://ftp.us.debian.org/debian/pool/main/z/zvbi/libzvbi0_0.2.41-1_amd64.deb
 nocross=yes
 
-# Get Viber verson.
-if [ -f "xbps-src" ]; then
-	if [ -d "masterdir-${XBPS_TARGET_MACHINE}/tmp" ]; then
-		cd "masterdir-${XBPS_TARGET_MACHINE}/tmp"
-		echo "Getting ${pkgname} version, this might take a minute..."
-		xbps-fetch "https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb>${pkgname}.deb"
-		ar x --output=. ${pkgname}.deb
-		xz -d control.tar.xz
-		tar -xf control.tar
-		tmpver=$(awk -F": " '/Version/ {print $NF}' control)
-		cd ../../
-		echo "${tmpver}">"masterdir-${XBPS_TARGET_MACHINE}/tmp/ver.txt"
-	else
-		echo "You need to run \"./xbps-src binary-bootstrap\" first, then run \"./xbps-src pkg ${pkgname}\"."
-		exit
-	fi
+# Get Viber's verson.
+if [ -f xbps-src ]; then
+	rm -rf ${XBPS_SRCDISTDIR}/${pkgname}-Temp
+	mkdir -p ${XBPS_SRCDISTDIR}/${pkgname}-Temp
+	cd ${XBPS_SRCDISTDIR}/${pkgname}-Temp
+	echo "Getting ${pkgname} version, this might take a minute..."
+	xbps-fetch "${_disturl}>${pkgname}.${XBPS_TARGET_MACHINE}.deb"
+	ar x ${pkgname}.${XBPS_TARGET_MACHINE}.deb
+	bsdtar -xf control.tar.xz
+	tmpver=$(awk -F": " '/Version/ {print $NF}' control)
+	echo ${tmpver}>${XBPS_SRCDISTDIR}/${pkgname}-Temp/ver.txt
 fi
 
-if [ ! -d "/builddir" ]; then
-	version=$(cat "masterdir-${XBPS_TARGET_MACHINE}/tmp/ver.txt")
-else
-	version=$(cat "/tmp/ver.txt")
-fi
+version=$(cat ${XBPS_SRCDISTDIR}/${pkgname}-Temp/ver.txt)
+
+do_fetch() {
+	rm -rf ${XBPS_SRCDISTDIR}/${pkgname}-${version}
+	rm -rf ${wrksrc}
+	mkdir -p ${XBPS_SRCDISTDIR}/${pkgname}-${version}
+	mv -f ${XBPS_SRCDISTDIR}/${pkgname}-Temp/${pkgname}.${XBPS_TARGET_MACHINE}.deb ${XBPS_SRCDISTDIR}/${pkgname}-${version}/${pkgname}-${version}.${XBPS_TARGET_MACHINE}.deb
+	cd ${XBPS_SRCDISTDIR}/${pkgname}-${version}
+	xbps-fetch "${_liburl}"
+}
+
+do_extract() {
+	# Extract the Viber .deb package.
+	ar x ${XBPS_SRCDISTDIR}/${pkgname}-${version}/${pkgname}-${version}.${XBPS_TARGET_MACHINE}.deb
+	bsdtar -xf data.tar.xz
+	rm -f control.tar.gz
+	rm -f data.tar.xz
+	rm -f debian-binary
+	# Extract the libraries.
+	ar x ${XBPS_SRCDISTDIR}/${pkgname}-${version}/libzvbi0_0.2.41-1_amd64.deb
+	bsdtar -xf data.tar.xz
+	rm -f control.tar.xz
+	rm -f data.tar.xz
+	rm -f debian-binary
+}
 
 post_extract() {
 	# Get the license file from the .deb package.
 	mkdir -p temp
-	ar x --output=temp "${XBPS_SRCDISTDIR}/${pkgname}-${version}/${pkgname}.deb"
-	xz -d temp/control.tar.xz
-	tar -C temp -xf temp/control.tar
-	iconv -f ISO-8859-1 -t UTF-8 -o LICENSE temp/copyright
+	cd temp
+	ar x ${XBPS_SRCDISTDIR}/${pkgname}-${version}/${pkgname}-${version}.${XBPS_TARGET_MACHINE}.deb
+	bsdtar -xf control.tar.xz
+	iconv -f ISO-8859-1 -t UTF-8 -o ../LICENSE copyright
+	cd ..
 	rm -rf temp
 	# Moving files so that the installation dir in /opt matches the package name.
 	mkdir -p opt/${pkgname}
@@ -66,5 +79,5 @@ do_install() {
 }
 
 do_clean() {
-	rm -rf /tmp/*
+	rm -rf ${XBPS_SRCDISTDIR}/${pkgname}-Temp
 }
