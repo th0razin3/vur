@@ -12,7 +12,7 @@ Basically, `xbps-src` doesn't allow repackaging or buidling without a version nu
 
 The `Keygen.exe` file is located in `/opt/XnView-MP/Keygen`. Yes, in order to register the software with the name that you'd like, you have to have Wine installed. The keygen is tested in Wine 9.6 and works OK. All you have to do is run `wine /opt/XnView-MP/Keygen/Keygen.exe` from a terminal. If you don't have Wine installed, use the name and serial provided in `Serial.txt` in the same directory (`/opt/XnView-MP/Keygen`). If you decide to remove XnView MP from your system, the `Keygen` directory will get removed as well, so you better make a copy of it if you'd like to keep the keygen.
 
-Oh, and XnView MP is an AMD64 (x86_64) only application. Don't look at me, I'm as surprised as you... apparently Rakuten doesn't care about any other architecture... go bug them about it.
+Oh, and XnView MP is an AMD64 (x86_64) only application. Don't look at me, I'm as surprised as you... apparently XnSoft doesn't care about any other architecture... go bug them about it.
 
 ## How do I install it?
 
