@@ -1,8 +1,8 @@
 # Template file for 'palemoon-gtk3'
 pkgname=palemoon-gtk3
-version=33.0.2
+version=33.1.1
 revision=1
-archs="i686 x86_64 aarch64"
+archs="i686 armv7l x86_64 aarch64"
 short_desc="Pale Moon is an Open Source Goanna-based web browser"
 maintainer="th0razin3 <th0razin3@proton.me>"
 license="MPL-2.0"
@@ -10,16 +10,20 @@ homepage="https://www.palemoon.org/"
 
 case "${XBPS_TARGET_MACHINE}" in
 	i686)
-		distfiles="https://download.opensuse.org/repositories/home:/stevenpusser:/palemoon-GTK3/Debian_12/i386/palemoon_${version}-${revision}.gtk3_i386.deb"
-		checksum="85116ddaf8f8ffa1ba8ba6cc4d5e7a8386e1bb16aea9bdf0c689948fd68534f7"
+		distfiles="https://download.opensuse.org/repositories/home:/stevenpusser:/palemoon-GTK3/Debian_11/i386/palemoon_${version}-${revision}.gtk3_i386.deb"
+		checksum="11cbb7f59b9a3956b0eb447effde87cc2d920375922f6e9698a060ebaef8efc9"
+		;;
+	armv7l)
+		distfiles="https://download.opensuse.org/repositories/home:/stevenpusser:/palemoon-GTK3/Debian_11/armhf/palemoon_${version}-${revision}.gtk3_armhf.deb"
+		checksum="79d12b6dbfe9cc1ad7fc324aa6415e220b7de67e0d193bc9c7001b1c2087f752"
 		;;
 	x86_64)
-		distfiles="https://download.opensuse.org/repositories/home:/stevenpusser:/palemoon-GTK3/Debian_12/amd64/palemoon_${version}-${revision}.gtk3_amd64.deb"
-		checksum="e01d80b46a886c55937718ddfed45f7d99a5c2ee306892d29296265e68585b53"
+		distfiles="https://download.opensuse.org/repositories/home:/stevenpusser:/palemoon-GTK3/Debian_11/amd64/palemoon_${version}-${revision}.gtk3_amd64.deb"
+		checksum="c5d4aef93b9484b299ec28e43bf3ce4f75bc88958c120361181dc12577a2dc22"
 		;;
 	aarch64)
-		distfiles="https://download.opensuse.org/repositories/home:/stevenpusser:/palemoon-GTK3/Debian_12/arm64/palemoon_${version}-${revision}.gtk3_arm64.deb"
-		checksum="6ffa191c0944f4d35e63497e33d676dee74dc6e66f57ba578d55b7b4f0d7e67d"
+		distfiles="https://download.opensuse.org/repositories/home:/stevenpusser:/palemoon-GTK3/Debian_11/arm64/palemoon_${version}-${revision}.gtk3_arm64.deb"
+		checksum="587acf91be68165ffe5654f73eb257a52d94cf2025f74a12c27e6ceeee245fdb"
 		;;
 esac
 
