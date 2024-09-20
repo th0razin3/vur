@@ -10,7 +10,7 @@ Pale Moon offers you a browsing experience in a browser completely built from it
 
 Clone this repository, copy/paste the `srcpkgs` directory in your locally cloned `void-packages` repo (repository) and build (repackage) the application with `./xbps-src pkg palemoon-gtk2`. You can then install Pale Moon with `sudo xbps-install --repository hostdir/binpkgs palemoon-gtk2`. Or, check the releases page in this repo for the latest repackaged version. You can install the Void Linux repack with `sudo xbps-install --repository /path/to/extracted/files palemoon-gtk2`.
 
-Oh, and you can't have both GTK2 and GTK3 builds of Pale Moon installed. If you have one or the other installed and you'd like to switch, first you need to uninstall the build you have installed. I could probably be able to make a repack that will allow both versions to be installed, but I don't see a point to be honest.
+Oh, and you can't have both GTK2 and GTK3 builds of Pale Moon installed. If you have one or the other installed and you'd like to switch, first you need to uninstall the build you have installed. I could probably make a repack that will allow both versions to be installed, but I don't see a point to be honest.
 
 ## A note for the Pale Moon developers, if they happen to stumble upon this repack
 
