@@ -1,8 +1,8 @@
 # Template file for 'palemoon-gtk2'
 pkgname=palemoon-gtk2
-version=33.0.2
+version=33.1.1
 revision=1
-archs="i686 x86_64 aarch64"
+archs="i686 armv7l x86_64 aarch64"
 short_desc="Pale Moon is an Open Source Goanna-based web browser"
 maintainer="th0razin3 <th0razin3@proton.me>"
 license="MPL-2.0"
@@ -10,16 +10,20 @@ homepage="https://www.palemoon.org/"
 
 case "${XBPS_TARGET_MACHINE}" in
 	i686)
-		distfiles="https://download.opensuse.org/repositories/home:/stevenpusser/Debian_12/i386/palemoon_${version}-${revision}.gtk2_i386.deb"
-		checksum="1e21c2846ddbecb11b921486c4338dcb44ee7a8905a04c7b7155182593cdc014"
+		distfiles="https://download.opensuse.org/repositories/home:/stevenpusser/Debian_11/i386/palemoon_${version}-${revision}.gtk2_i386.deb"
+		checksum="281f87b3805b4021fa98ac61e417402d42264cf8fcb45374d7a3acd440a62055"
+		;;
+	armv7l)
+		distfiles="https://download.opensuse.org/repositories/home:/stevenpusser/Debian_11/armhf/palemoon_${version}-${revision}.gtk2_armhf.deb"
+		checksum="402326f205bdab3edb4076af666536914280d02255c714504215f241aa688900"
 		;;
 	x86_64)
-		distfiles="https://download.opensuse.org/repositories/home:/stevenpusser/Debian_12/amd64/palemoon_${version}-${revision}.gtk2_amd64.deb"
-		checksum="cca2689388b47139c3dc612d3ba13dd4e281ea788ae4200165837d58ea8bbda9"
+		distfiles="https://download.opensuse.org/repositories/home:/stevenpusser/Debian_11/amd64/palemoon_${version}-${revision}.gtk2_amd64.deb"
+		checksum="c46799b8b212cc7b281e4f99fb9ab979d04ba389f98524a0273824998107d7c1"
 		;;
 	aarch64)
-		distfiles="https://download.opensuse.org/repositories/home:/stevenpusser/Debian_12/arm64/palemoon_${version}-${revision}.gtk2_arm64.deb"
-		checksum="fb09564f286df75863296b26610fa52843c22ca878f6069f49b678bd865e1ee1"
+		distfiles="https://download.opensuse.org/repositories/home:/stevenpusser/Debian_11/arm64/palemoon_${version}-${revision}.gtk2_arm64.deb"
+		checksum="7e4975cb01ef594fdfac6e7e616e7a3db3ff6c440dd090364b53c6461da233af"
 		;;
 esac
 
