@@ -75,6 +75,9 @@ post_extract() {
 do_install() {
 	vcopy usr /
 	vcopy opt /
+}
+
+post_install() {
 	vlicense LICENSE
 }
 
