@@ -1,3 +1,7 @@
 # Stacher for Void Linux
 
 <p align="center"><img src="https://codeberg.org/th0razin3/vur/raw/branch/main/srcpkgs/Stacher/Stacher.png"></p>
+
+Stacher is a frontend (UI) for `yt-dlp`, combining the powerful functionality of the latter with the perks of working with a modern-looking GUI. It is important to mention that Stacher automatically installs `yt-dlp` on startup (renames it to `youtube-dl` afterwards), but you can configure it to use any fork application. You can also set your own paths to `yt-dlp` and `ffmpeg`, but if you have them installed as root (for all users), you have to start the application as root to set the path (it won't let you choose those binaries from the file picker if you're not running the application as root). The application features an elegant, black-themed GUI (which, for some reason, I was never able to find or configure for the Linux version), allowing you to paste the URL of the video to download in the dedicated field.
+
+Stacher loads the video thumbnail and reveals its size, the download speed and the elapsed time before the download is completed. You can restart the download with a click and navigate to the source URL just as easily, from the right-click menu. The download location is easily accessible as well. A few additional settings allow you to modify the download location and change the filename of the output file automatically.
