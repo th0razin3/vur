@@ -16,4 +16,4 @@ Stacher is currently an AMD64 (x86_64) application, but if it goes open source, 
 
 ## How do I install it?
 
-You can use the prebuilt binaries in the releases page, or you can build your own. Download this repository (repo), copy/paste the `srcpkgs` folder in your local `void-packages` cloned repo (from [here](https://github.com/void-linux/void-packages)), run `./xbps-src pkg Stacher` and wait for the building process to end. Afterwards, you can install the application with `sudo xbps-install --repository hostdir/binpkgs Stacher`. If you've downloaded the prebuilt packages from the releases page, you can install the application with `sudo xbps-install --repository /path/to/extracted/files Stacher`.
+Clone this repository, copy/paste the `srcpkgs` directory in your locally cloned `void-packages` repo (repository) and build (repackage) the application with `./xbps-src pkg Stacher`. You can then install XnView MP with `sudo xbps-install --repository hostdir/binpkgs Stacher`. Or, check the releases page in this repo for the latest repackaged version. You can install the Void Linux repack with `sudo xbps-install --repository /path/to/extracted/files Stacher`.
