@@ -16,4 +16,4 @@ Oh, and XnView MP is an AMD64 (x86_64) only application. Don't look at me, I'm a
 
 ## How do I install it?
 
-Clone this repository, copy/paste the `srcpkgs` directory in your locally cloned `void-packages` repo (repository) and build (repackage) the application with `./xbps-src pkg XnView-MP`. You can then install XnView MP with `sudo xbps-install --repository hostdir/binpkgs XnView-MP`. Or, check the releases page in this repo for the latest repackaged version. You can install the Void Linux repack with `sudo xbps-install --repository /path/to/extracted/files XnView-MP`. Unfortunatelly, only x64 builds/repackages are available (XnSoft only provides AMD64 binaries for Linux).
+Clone this repository, copy/paste the `srcpkgs` directory in your locally cloned `void-packages` repo (repository) and build (repackage) the application with `./xbps-src pkg XnView-MP`. You can then install XnView MP with `sudo xbps-install --repository hostdir/binpkgs XnView-MP`. Or, check the releases page in this repo for the latest repackaged version. You can install the Void Linux repack with `sudo xbps-install --repository /path/to/extracted/files XnView-MP`.
