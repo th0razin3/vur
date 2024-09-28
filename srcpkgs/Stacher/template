@@ -1,0 +1,67 @@
+# Template file for 'Stacher'
+pkgname=Stacher
+_pkgname=stacher
+revision=1
+archs="x86_64"
+short_desc="Stacher is a modern GUI front-end for yt-dlp"
+maintainer="th0razin3 <th0razin3@proton.me>"
+license="CC-BY-NC-ND-4.0"
+homepage="https://stacher.io/"
+_disturl=https://cdn.${_pkgname}.io/builds/${pkgname}.deb
+nocross=yes
+
+# Get Stacher's verson.
+if [ -f xbps-src ]; then
+	rm -rf ${XBPS_SRCDISTDIR}/${pkgname}-Temp
+	mkdir -p ${XBPS_SRCDISTDIR}/${pkgname}-Temp
+	cd ${XBPS_SRCDISTDIR}/${pkgname}-Temp
+	echo "Getting ${pkgname} version, this might take a minute..."
+	xbps-fetch "${_disturl}>${pkgname}.${XBPS_TARGET_MACHINE}.deb"
+	ar x ${pkgname}.${XBPS_TARGET_MACHINE}.deb
+	bsdtar -xf control.tar.xz
+	tmpver=$(awk -F": " '/Version/ {print $NF}' control)
+	echo ${tmpver}>${XBPS_SRCDISTDIR}/${pkgname}-Temp/ver.txt
+fi
+
+version=$(cat ${XBPS_SRCDISTDIR}/${pkgname}-Temp/ver.txt)
+
+do_fetch() {
+	rm -rf ${XBPS_SRCDISTDIR}/${pkgname}-${version}
+	rm -rf ${wrksrc}
+	mkdir -p ${XBPS_SRCDISTDIR}/${pkgname}-${version}
+	mv -f ${XBPS_SRCDISTDIR}/${pkgname}-Temp/${pkgname}.${XBPS_TARGET_MACHINE}.deb ${XBPS_SRCDISTDIR}/${pkgname}-${version}/${pkgname}-${version}.${XBPS_TARGET_MACHINE}.deb
+}
+
+do_extract() {
+	# Extract the Stacher .deb package.
+	vsrcextract -C ${wrksrc} ${pkgname}-${version}.${XBPS_TARGET_MACHINE}.deb
+}
+
+post_extract() {
+	# Remove everything in /usr/share/doc, since the only file there is a
+	# butchered MIT license (a packaging error).
+	rm -rf usr/share/doc
+	# Remove leftover stuff from the Debian package (lintian overrides).
+	rm -rf usr/share/lintian
+	# Remove the simlink in /usr/bin, we'll make a new one.
+	rm -f usr/bin/${_pkgname}
+	# Moving files so Stacher is installed in /opt instead of /usr/lib.
+	mkdir -p opt/${pkgname}
+	mv -f usr/lib/${_pkgname}/* opt/${pkgname}
+	rm -rf usr/lib
+	# Making a simlink to /usr/bin so that Stacher can be run from the terminal.
+	ln -sf /opt/${pkgname}/${pkgname} usr/bin
+	# Correcting the path to the binary in the .desktop file.
+	sed -i 's@Exec=stacher@Exec=Stacher@g' usr/share/applications/${_pkgname}.desktop
+	# Correcting the description in the .desktop file.
+	sed -i 's@UI for youtube-dl@UI for yt-dlp@g' usr/share/applications/${_pkgname}.desktop
+}
+
+do_install() {
+	vcopy usr /
+	vcopy opt /
+}
+
+do_clean() {
+	rm -rf ${XBPS_SRCDISTDIR}/${pkgname}-Temp
+}
