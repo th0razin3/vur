@@ -1,0 +1,1 @@
+# Stacher for Void Linux
