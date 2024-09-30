@@ -1,6 +1,6 @@
 # DIE (Detect It Easy) for Void Linux
 
-<p align="center"><img src="https://gitea.com/th0razin3/vur/raw/branch/main/srcpkgs/DIE/DIE.png"></p>
+<p align="center"><img src="https://codeberg.org/th0razin3/vur/raw/branch/main/srcpkgs/DIE/DIE.png"></p>
 
 Detect It Easy, or abbreviated "DIE" is a program for determining types of files.
 
