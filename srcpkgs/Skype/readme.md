@@ -17,3 +17,7 @@ Oh, and Skype is an AMD64 (x86_64) only application. Don't look at me, I'm as su
 ## How do I install it?
 
 Clone this repository, copy/paste the `srcpkgs` directory in your locally cloned `void-packages` repo (repository) and build (repackage) the application with `./xbps-src pkg Skype`. You can then install Skype with `sudo xbps-install --repository hostdir/binpkgs Skype`. Or, check the releases page in this repo for the latest repackaged version. You can install the Void Linux repack with `sudo xbps-install --repository /path/to/extracted/files Skype`.
+
+## How do I know if Skype is out of date?
+
+You don't... the moment it stops working (connecting to the network), that means it's probably out of date (there may be an indicator somewhere in the UI, I have't checked or noticed to be honest). Run this template again in `xbps-src` (`./xbps-src pkg Skype`) and that will generate a new version of the package in `hostdir/binpkgs`. The repodata file will hold only the latest version, but the old version (if you hold that one) will still be in `hostdir/binpkgs`, so you better delete it (if you don't need it). Afterwards, just remove Skype from your PC/Laptop (`sudo xbps-remove -ROov Skype`), and then install it from `hostdir/binpkgs` (`sudo xbps-install --repository hostdir/binpkgs Skype` or `sudo xbps-install -R hostdir/binpkgs Skype`).
