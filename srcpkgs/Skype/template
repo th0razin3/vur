@@ -55,7 +55,7 @@ do_extract() {
 	unsquashfs -no-xattrs -d ${wrksrc} ${XBPS_SRCDISTDIR}/${pkgname}-${version}/${pkgname}-${version}.${XBPS_TARGET_MACHINE}.sqfs "${_skype_extract[@]}"
 }
 
-post_extract() {
+pre_install() {
 	# Moving the .desktop file.
 	mkdir -p usr/share/applications
 	mv -f snap/gui/skypeforlinux.desktop usr/share/applications/${pkgname}.desktop
