@@ -13,6 +13,7 @@ Currently, this repository holds the following templates.
 - OpenBoard
 - Pale Moon (GTK2 and GTK3)
 - PreSonus Studio One
+- Skype
 - Stacher
 - Tuner
 - Viber
