@@ -1,0 +1,96 @@
+# Template file for 'Skype'
+pkgname=Skype
+_pkgname=skype
+revision=1
+archs="x86_64"
+_snapcraft_api_url='http://api.snapcraft.io/v2/snaps/info'
+_skype_extract=('snap/gui/*.desktop' 'usr/share/icons/hicolor/*/apps' 'usr/share/pixmaps' 'usr/share/skypeforlinux' 'usr/share/doc/skypeforlinux')
+hostmakedepends="squashfs-tools"
+short_desc="Skype is a VoIP service/software for audio and video calls"
+maintainer="th0razin3 <th0razin3@proton.me>"
+license="custom:Skype"
+homepage="https://www.skype.com/"
+nocross=yes
+
+# Get Skype's verson.
+if [ -f xbps-src ]; then
+	# Cleaning the temp directory. Not necessary, but juts in case of
+	# leftovers from previous unsuccessful packaging attempts, since
+	# this template creates files outside of the masterdir and they
+	# don't get cleaned when running "./xbps-src clean".
+	rm -rf ${XBPS_SRCDISTDIR}/${pkgname}-*
+	mkdir -p ${XBPS_SRCDISTDIR}/${pkgname}-Temp
+	# Checking whether curl and jq are installed in the host environment.
+	# Both of them are needed in order to get the Skype version.
+	if [ ! -f /usr/bin/curl ]; then
+		echo "You need to install curl. Run \"sudo xbps-install -Suv curl\"."
+		exit
+	fi
+	if [ ! -f /usr/bin/jq ]; then
+		echo "You need to install jq. Run \"sudo xbps-install -Suv jq\"."
+		exit
+	fi
+	# Positioning in the temp dir.
+	cd ${XBPS_SRCDISTDIR}/${pkgname}-Temp
+	# Getting Skype's .snap file URL and version.
+	curl -s -H 'Snap-Device-Series: 16' ${_snapcraft_api_url}/${_pkgname} | jq '.' > ${_pkgname}-info.json
+	# Getting the .snap file download URL.
+	awk '/"amd64",/ {_arch=1} /"url": / &&_arch{sub(/"url": /, ""); gsub (/"/, ""); gsub(/ /, ""); print $0; exit}' ${_pkgname}-info.json > ${_pkgname}-${XBPS_TARGET_MACHINE}-url.txt
+	# Getting the version.
+	awk '/"amd64",/ {_arch=1} /"version": / &&_arch{sub(/"version": /, ""); gsub (/"/, ""); gsub(/ /, ""); print $0; exit}' ${_pkgname}-info.json > ${_pkgname}-${XBPS_TARGET_MACHINE}-version.txt
+fi
+
+version=$(cat ${XBPS_SRCDISTDIR}/${pkgname}-Temp/${_pkgname}-${XBPS_TARGET_MACHINE}-version.txt)
+_snapurl=$(cat ${XBPS_SRCDISTDIR}/${pkgname}-Temp/${_pkgname}-${XBPS_TARGET_MACHINE}-url.txt)
+
+do_fetch() {
+	rm -rf ${wrksrc}
+	mkdir -p ${XBPS_SRCDISTDIR}/${pkgname}-${version}
+	cd ${XBPS_SRCDISTDIR}/${pkgname}-${version}
+	xbps-fetch "${_snapurl}>${pkgname}-${version}.${XBPS_TARGET_MACHINE}.sqfs"
+}
+
+do_extract() {
+	# Extracting Skype's files from the .snap package.
+	unsquashfs -no-xattrs -d ${wrksrc} ${XBPS_SRCDISTDIR}/${pkgname}-${version}/${pkgname}-${version}.${XBPS_TARGET_MACHINE}.sqfs "${_skype_extract[@]}"
+}
+
+post_extract() {
+	# Moving the .desktop file.
+	mkdir -p usr/share/applications
+	mv -f snap/gui/skypeforlinux.desktop usr/share/applications/${pkgname}.desktop
+	rm -r snap
+	# Moving Skype to /opt.
+	mkdir -p opt/${pkgname}
+	mv -f usr/share/skypeforlinux/* opt/${pkgname}
+	rm -r usr/share/skypeforlinux
+	# Renaming some files and executables.
+	mv -f usr/share/pixmaps/skypeforlinux.png usr/share/pixmaps/${pkgname}.png
+	find usr/share/icons/hicolor -type f -name "skypeforlinux.png" -exec sh -c '_sip={}; mv -f ${_sip} $(dirname ${_sip})/Skype.png' \;
+	mv -f opt/${pkgname}/skypeforlinux opt/${pkgname}/${pkgname}
+	# Making a symlink to /usr/bin.
+	mkdir -p usr/bin
+	ln -s /opt/${pkgname}/${pkgname} usr/bin/${pkgname}
+	# Correcting some things in the .desktop file.
+	sed -i 's@Exec=skype %U@Exec=Skype %U@g' usr/share/applications/${pkgname}.desktop
+	sed -i 's@Icon=${SNAP}/meta/gui/skypeforlinux.png@Icon=/usr/share/pixmaps/Skype.png@g' usr/share/applications/${pkgname}.desktop	
+	sed -i 's@Exec=skype --shutdown@Exec=Skype --shutdown@g' usr/share/applications/${pkgname}.desktop
+	# Moving and copying the license file/service agreement.
+	mkdir -p usr/share/doc/Skype
+	mv -f usr/share/doc/skypeforlinux/NOTICE.txt usr/share/doc/${pkgname}/LICENSE.txt
+	rm -rf usr/share/doc/skypeforlinux
+	cp -a usr/share/doc/${pkgname}/LICENSE.txt LICENSE
+}
+
+do_install() {
+	vcopy opt /
+	vcopy usr /
+}
+
+post_install() {
+	vlicense LICENSE
+}
+
+do_clean() {
+	rm -rf ${XBPS_SRCDISTDIR}/${pkgname}-*
+}
