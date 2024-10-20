@@ -10,7 +10,6 @@ short_desc="Skype is a VoIP service/software for audio and video calls"
 maintainer="th0razin3 <th0razin3@proton.me>"
 license="custom:Skype"
 homepage="https://www.skype.com/"
-nocross=yes
 
 # Get Skype's verson.
 if [ -f xbps-src ]; then
