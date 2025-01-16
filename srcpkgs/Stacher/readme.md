@@ -17,6 +17,3 @@ Stacher is currently an AMD64 (x86_64) application, but if it goes open source, 
 ## How do I install it?
 
 Clone this repository, copy/paste the `srcpkgs` directory in your locally cloned `void-packages` repo (repository) and build (repackage) the application with `./xbps-src pkg Stacher`. You can then install Stacher with `sudo xbps-install --repository hostdir/binpkgs Stacher`. Or, check the releases page in this repo for the latest repackaged version. You can install the Void Linux repack with `sudo xbps-install --repository /path/to/extracted/files Stacher`.
-
-
-
