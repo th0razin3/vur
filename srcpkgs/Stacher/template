@@ -7,7 +7,7 @@ short_desc="Stacher is a modern GUI front-end for yt-dlp"
 maintainer="th0razin3 <th0razin3@proton.me>"
 license="CC-BY-NC-ND-4.0"
 homepage="https://stacher.io/"
-_disturl=https://cdn.${_pkgname}.io/builds/${pkgname}.deb
+_disturl=https://api.stacher.io/api/update/linux/x64/latest
 nocross=yes
 
 # Get Stacher's verson.
@@ -18,7 +18,7 @@ if [ -f xbps-src ]; then
 	echo "Getting ${pkgname} version, this might take a minute..."
 	xbps-fetch "${_disturl}>${pkgname}.${XBPS_TARGET_MACHINE}.deb"
 	ar x ${pkgname}.${XBPS_TARGET_MACHINE}.deb
-	bsdtar -xf control.tar.xz
+	bsdtar -xf control.tar.zst
 	tmpver=$(awk -F": " '/Version/ {print $NF}' control)
 	echo ${tmpver}>${XBPS_SRCDISTDIR}/${pkgname}-Temp/ver.txt
 fi
@@ -44,17 +44,27 @@ post_extract() {
 	# Remove leftover stuff from the Debian package (lintian overrides).
 	rm -rf usr/share/lintian
 	# Remove the simlink in /usr/bin, we'll make a new one.
-	rm -f usr/bin/${_pkgname}
+	rm -f usr/bin/${_pkgname}7
 	# Moving files so Stacher is installed in /opt instead of /usr/lib.
 	mkdir -p opt/${pkgname}
-	mv -f usr/lib/${_pkgname}/* opt/${pkgname}
+	mv -f usr/lib/${_pkgname}7/* opt/${pkgname}
 	rm -rf usr/lib
+	# Renaming the icon filename.
+	mv -f usr/share/pixmaps/${_pkgname}7.png usr/share/pixmaps/${pkgname}.png
+	# Renaming the .desktop file filename.
+	mv -f usr/share/applications/${_pkgname}7.desktop usr/share/applications/${pkgname}.desktop
+	# Rename the binary filename.
+	mv -f opt/${pkgname}/${pkgname}7 opt/${pkgname}/${pkgname}
 	# Making a simlink to /usr/bin so that Stacher can be run from the terminal.
 	ln -sf /opt/${pkgname}/${pkgname} usr/bin
-	# Correcting the path to the binary in the .desktop file.
-	sed -i 's@Exec=stacher@Exec=Stacher@g' usr/share/applications/${_pkgname}.desktop
-	# Correcting the description in the .desktop file.
-	sed -i 's@UI for youtube-dl@UI for yt-dlp@g' usr/share/applications/${_pkgname}.desktop
+	# Correcting some things in the .desktop file.
+	sed -i 's@Name=Stacher7@Name=Stacher@g' usr/share/applications/${pkgname}.desktop
+	sed -i 's@for the youtube-dl (yt-dlp fork) command@for the yt-dlp (youtube-dl fork) command@g' usr/share/applications/${pkgname}.desktop
+	sed -i 's@line tool.  Stacher is designed@line tool. Stacher is designed@g' usr/share/applications/${pkgname}.desktop
+	sed -i 's@GenericName=Stacher7@GenericName=Stacher@g' usr/share/applications/${pkgname}.desktop
+	sed -i 's@Exec=stacher7@Exec=Stacher@g' usr/share/applications/${pkgname}.desktop
+	sed -i 's@Icon=stacher7@Icon=Stacher@g' usr/share/applications/${pkgname}.desktop
+	sed -i 's@GNOME;GTK;Utility;@GNOME;GTK;Utility;Network;@g' usr/share/applications/${pkgname}.desktop
 }
 
 do_install() {
