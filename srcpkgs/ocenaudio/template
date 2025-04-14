@@ -1,6 +1,6 @@
 # Template file for 'ocenaudio'
 pkgname=ocenaudio
-version=3.14.1
+version=3.14.10
 revision=1
 archs="x86_64"
 short_desc="ocenaudio is a cross-platform, easy to use audio editor."
@@ -8,7 +8,7 @@ maintainer="th0razin3 <th0razin3@proton.me>"
 license="custom:ocenaudio"
 homepage="https://www.ocenaudio.com/"
 distfiles="https://www.ocenaudio.com/downloads/ocenaudio_debian12.deb?version=v${version}>${pkgname}-${XBPS_TARGET_MACHINE}-${version}.deb"
-checksum="df086d46e5fe5f9d0ffb8dba6163bad7c0f12475fc0f5046988c2f358a4b5f2d"
+checksum="1c0bb93e88827f188dfc47f1d83198a8530fcec14897b800ce4d8bf998b8c552"
 shlib_provides="libbz2.so.1.0"
 
 do_install() {
