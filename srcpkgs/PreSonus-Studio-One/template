@@ -1,16 +1,16 @@
 # Template file for 'PreSonus-Studio-One'
 pkgname=PreSonus-Studio-One
-version=6.6.2.100548
+version=6.6.4.102451
 revision=1
 archs="x86_64"
 short_desc="PresSonus Studio One is a digital audio workstation (DAW) application, used to create, record, mix and master music and other audio."
 maintainer="th0razin3 <th0razin3@proton.me>"
 license="custom:PreSonus"
 homepage="https://www.presonus.com/en/studio-one.html"
-distfiles="https://archive.org/download/presonus-studio-one-${version}/PreSonus%20Studio%20One%206.6%20%28x86_64%29.deb>${pkgname}-${version}.${XBPS_TARGET_MACHINE}.deb
+distfiles="https://archive.org/download/presonus-studio-one-${version}/PreSonus%20Studio%20One%20${version}.deb>${pkgname}-${version}.${XBPS_TARGET_MACHINE}.deb
  https://web.archive.org/web/20240520082109/http://archive.ubuntu.com/ubuntu/pool/main/libu/libunistring/libunistring5_1.1-2build1_amd64.deb
  https://web.archive.org/web/20240520085202/http://archive.ubuntu.com/ubuntu/pool/main/i/icu/libicu74_74.2-1ubuntu3_amd64.deb"
-checksum="897370745f2b85aeb92c2a6789469f34f64b49771e7bcda41ed5391457564342
+checksum="7e01bfdc1b72807bb84237079e599bb5dbb5270de23c7984e59cada819bc332e
  78acc4c141a499e0c1e4cc47ca8e9082996f3972662c4d92337669ecc9b0a519
  d29c97a21a3e3254731cfac186e4d4e611e5e67d2c9a0430f6acfbd9acaefa2e"
 nocross=yes
