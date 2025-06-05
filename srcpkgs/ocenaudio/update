@@ -1,2 +1,2 @@
-pattern='<p><a href="\/download\?version=v\K[\d\.]+'
+pattern='<p><a href="\/download\?version=\K[\d\.]+'
 site="https://www.ocenaudio.com/en/changelog"
