@@ -1,20 +1,28 @@
 # Template file for 'ocenaudio'
 pkgname=ocenaudio
-version=3.15.0
+version=3.16.0
 revision=1
 archs="x86_64"
+makedepends="patchelf"
 short_desc="ocenaudio is a cross-platform, easy to use audio editor."
 maintainer="th0razin3 <th0razin3@proton.me>"
 license="custom:ocenaudio"
 homepage="https://www.ocenaudio.com/"
 distfiles="https://www.ocenaudio.com/downloads/ocenaudio_debian12.deb?version=${version}>${pkgname}-${XBPS_TARGET_MACHINE}-${version}.deb"
-checksum="3198e0742044fb7746e8ebfec300ca6bfd18f17222870339d0673f72011fd854"
+checksum="70d8795de0bfcfd9f859411b91f26a8a31409a0141710647e0057cd8cf20cbd4"
 shlib_provides="libbz2.so.1.0"
+
+post_extract() {
+	mkdir -p usr/bin
+	ln -s /opt/${pkgname}/bin/${pkgname} usr/bin/${pkgname}
+	patchelf --replace-needed libqtocenai.so.3.15 libqtocenai.so.3.16 opt/${pkgname}/lib/libqtocendemucs.so
+	patchelf --replace-needed libqtocencore.so.3.15 libqtocencore.so.3.16 opt/${pkgname}/lib/libqtocendemucs.so
+}
 
 do_install() {
 	vcopy usr /
 	vcopy opt /
-	cp opt/ocenaudio/bin/ocenaudio_license.txt LICENSE
+	cp opt/${pkgname}/bin/ocenaudio_license.txt LICENSE
 }
 
 post_install() {
