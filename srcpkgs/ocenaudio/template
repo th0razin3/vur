@@ -9,7 +9,7 @@ maintainer="th0razin3 <th0razin3@proton.me>"
 license="custom:ocenaudio"
 homepage="https://www.ocenaudio.com/"
 distfiles="https://www.ocenaudio.com/downloads/ocenaudio_debian12.deb?version=${version}>${pkgname}-${XBPS_TARGET_MACHINE}-${version}.deb"
-checksum="70d8795de0bfcfd9f859411b91f26a8a31409a0141710647e0057cd8cf20cbd4"
+checksum="cf957955b2e2d2379c2e146cfe5383eac3e123f31123b1c6e60a60c7f04075e9"
 shlib_provides="libbz2.so.1.0"
 
 post_extract() {
