@@ -1,6 +1,6 @@
 # Template file for 'ocenaudio'
 pkgname=ocenaudio
-version=3.16.0
+version=3.16.5
 revision=1
 archs="x86_64"
 makedepends="patchelf"
