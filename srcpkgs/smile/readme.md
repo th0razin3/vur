@@ -2,7 +2,7 @@
 
 <p align="center"><img src="https://codeberg.org/th0razin3/vur/raw/branch/main/srcpkgs/smile/smile.png"></p>
 
-Smile is a simple emoji picker for Linux with custom tags support. It's build with Python 3 and GTK 3/4.
+Smile is a simple emoji picker for Linux with custom tags support. It's build with Python 3 and GTK 3/4. The official releases are Flatpak only, but I decided to build and repackge this as a system wide package. The source is released [here](https://github.com/mijorus/smile).
 
 ## How do I install it?
 
