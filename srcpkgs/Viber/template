@@ -2,13 +2,17 @@
 pkgname=Viber
 revision=1
 archs="x86_64"
+depends="jbigkit-libs "
 short_desc="Viber is a cross-platform VoIP and IM software application."
 maintainer="th0razin3 <th0razin3@proton.me>"
 license="custom:Viber"
 homepage="https://www.viber.com/"
 _disturl=https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb
-_liburl=https://web.archive.org/web/20240731093616/http://ftp.us.debian.org/debian/pool/main/z/zvbi/libzvbi0_0.2.41-1_amd64.deb
+_libzvbi=https://web.archive.org/web/20240731093616/http://ftp.us.debian.org/debian/pool/main/z/zvbi/libzvbi0_0.2.41-1_amd64.deb
+_libjpeg62=https://web.archive.org/web/20260401091557/http://ftp.us.debian.org/debian/pool/main/libj/libjpeg-turbo/libjpeg62-turbo_2.0.6-4_amd64.deb
+_libjbig0_21=https://web.archive.org/web/20260401093237/http://ftp.us.debian.org/debian/pool/main/j/jbigkit/libjbig0_2.1-6.1+b3_amd64.deb
 nocross=yes
+nopie=yes
 
 # Get Viber's verson.
 if [ -f xbps-src ]; then
@@ -31,7 +35,9 @@ do_fetch() {
 	mkdir -p ${XBPS_SRCDISTDIR}/${pkgname}-${version}
 	mv -f ${XBPS_SRCDISTDIR}/${pkgname}-Temp/${pkgname}.${XBPS_TARGET_MACHINE}.deb ${XBPS_SRCDISTDIR}/${pkgname}-${version}/${pkgname}-${version}.${XBPS_TARGET_MACHINE}.deb
 	cd ${XBPS_SRCDISTDIR}/${pkgname}-${version}
-	xbps-fetch "${_liburl}"
+	xbps-fetch "${_libzvbi}"
+	xbps-fetch "${_libjpeg62}"
+	xbps-fetch "${_libjbig0_21}"
 }
 
 do_extract() {
@@ -43,6 +49,16 @@ do_extract() {
 	rm -f debian-binary
 	# Extract the libraries.
 	ar x ${XBPS_SRCDISTDIR}/${pkgname}-${version}/libzvbi0_0.2.41-1_amd64.deb
+	bsdtar -xf data.tar.xz
+	rm -f control.tar.xz
+	rm -f data.tar.xz
+	rm -f debian-binary
+	ar x ${XBPS_SRCDISTDIR}/${pkgname}-${version}/libjpeg62-turbo_2.0.6-4_amd64.deb
+	bsdtar -xf data.tar.xz
+	rm -f control.tar.xz
+	rm -f data.tar.xz
+	rm -f debian-binary
+	ar x ${XBPS_SRCDISTDIR}/${pkgname}-${version}/libjbig0_2.1-6.1+b3_amd64.deb
 	bsdtar -xf data.tar.xz
 	rm -f control.tar.xz
 	rm -f data.tar.xz
@@ -62,14 +78,33 @@ post_extract() {
 	mkdir -p opt/${pkgname}
 	mv -f opt/viber/* opt/${pkgname}
 	rm -rf opt/viber
-	# Making a link to /usr/bin so that Viber can be run from the terminal.
+	# Making a symlink to /usr/bin so that Viber can be run from the terminal.
 	mkdir -p usr/bin
 	ln -sf /opt/${pkgname}/${pkgname} usr/bin
+	# Making a symlink to libjbig.so.2.1, the filename of the original is libjbig.so.0.
+	cd opt/${pkgname}/lib
+	ln -sf libjbig.so.0 libjbig.so.2.1
+	cd ../../..
 	# Correcting the path to the binary in the .desktop file.
 	sed -i 's@/opt/viber/Viber@/opt/Viber/Viber@g' usr/share/applications/viber.desktop
 	# Moving files from /usr/lib to /opt/Viber/lib.
 	mv -f usr/lib/x86_64-linux-gnu/* opt/Viber/lib
 	rm -rf usr/lib
+	# Removing lintian/overrides (matters only for Debian).
+	rm -rf usr/share/lintian
+	# Correcting the name of the .png file in usr/share/pixmaps, so that it matches the
+	# the filename of the binary.
+	mv -f usr/share/pixmaps/viber.png usr/share/pixmaps/Viber.png
+	# Correcting the filename of the .desktop file, so that it matches the filename of
+	# the binary.
+	mv -f usr/share/applications/viber.desktop usr/share/applications/Viber.desktop
+	# Correcting the name of the icon in the .desktop file, so that it matches the names
+	# of the icons.
+	sed -i 's@Icon=viber@Icon=Viber@g' usr/share/applications/Viber.desktop
+	# Correcting the shared icons dir in /usr/share/viber to match the name of the binary.
+	mkdir -p usr/share/Viber
+	mv -f usr/share/viber/* usr/share/Viber
+	rm -rf usr/share/viber
 }
 
 do_install() {
