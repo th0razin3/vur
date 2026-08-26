@@ -1,0 +1,121 @@
+# Template file for 'OpenArena'
+pkgname=OpenArena
+version=0.8.8
+revision=1
+archs="i686 x86_64"
+short_desc="Free and open-source 3D FPS based on ioquake3"
+maintainer="th0razin3 <th0razin3@proton.me>"
+license="GPL-2.0-only"
+homepage="http://openarena.ws"
+distfiles="https://download.tuxfamily.org/openarena/rel/088/openarena-${version}.zip
+ https://i.imgur.com/z7ESe6e.png>${pkgname}.png"
+checksum="5a8faf7f5b51f351b0a1618c06b6b98a5f1a6758f1d39818de2c87df2a0bac4a
+ 273d88108cdedeefd8d37075b3960ee4d7c0b6d19bb25afb3f71d12984eb6e7f"
+origbinname=openarena
+origsrvname=oa_ded
+skip_extraction="OpenArena.png"
+nopie=yes
+
+post_extract() {
+	# Remove Windows binaries and DLLs.
+	rm -f *.exe *.dll
+
+	# Remove MacOS app bundles and metadata.
+	rm -rf __MACOSX *.app "OpenArena 0.8.8 r28.app" OpenArena.app
+
+	# Prune binaries for other architectures and normalize binary
+        # names to drop architecture suffixes.
+	case "$XBPS_TARGET_MACHINE" in
+		i686)
+			mv openarena.i386 ${origbinname}
+			mv oa_ded.i386 ${origsrvname}
+			rm -f *.x86_64
+			;;
+		x86_64)
+			mv openarena.x86_64 ${origbinname}
+			mv oa_ded.x86_64 ${origsrvname}
+			rm -f *.i386
+			;;
+	esac
+
+	# Moving everything to /opt/OpenArena.
+	mkdir -p opt/${pkgname}
+	for oafiles in *; do
+		[ "${oafiles}" = "opt" ] && continue
+		mv "${oafiles}" opt/${pkgname}/
+	done
+
+	# Copy icon from sources download directory.
+	mkdir -p usr/share/pixmaps
+	cp "${XBPS_SRCDISTDIR}/${pkgname}-${version}/${pkgname}.png" usr/share/pixmaps/
+	chmod 644 usr/share/pixmaps/${pkgname}.png
+
+	# Create a desktop entry.
+
+	mkdir -p usr/share/applications
+	cat <<- 'EOF' > usr/share/applications/${pkgname}.desktop
+		[Desktop Entry]
+		Type=Application
+		Name=OpenArena
+		GenericName=First Person Shooter
+		Comment=Free and open-source 3D FPS based on ioquake3
+		Exec=OpenArena
+		Icon=OpenArena
+		Terminal=false
+		StartupNotify=false
+		Categories=Game;ActionGame;ArcadeGame;
+		Keywords=fps;first person shooter;quake;arena;multiplayer;3d;ioquake3;
+	EOF
+
+	# Create launcher wrapper scripts.
+	mkdir -p usr/bin
+	cat <<- 'EOF' > usr/bin/${pkgname}
+		#!/bin/sh
+		exec /opt/OpenArena/openarena +set fs_basepath /opt/OpenArena "$@"
+	EOF
+	cat <<- 'EOF' > usr/bin/OpenArena-Server
+		#!/bin/sh
+		exec /opt/OpenArena/oa_ded +set fs_basepath /opt/OpenArena "$@"
+	EOF
+	chmod 755 usr/bin/*
+
+	# Create runit service directory and run script.
+	mkdir -p etc/sv/openarena-server
+	cat <<- 'EOF' > etc/sv/openarena-server/run
+		#!/bin/sh
+		#
+		# Dedicated modes:
+		# 0 = Client mode (requires GUI / display)
+		# 1 = LAN dedicated server (headless)
+		# 2 = Internet dedicated server (headless + master server heartbeats)
+		#
+		# If you place a 'server.cfg' file in /opt/OpenArena/baseoa/, you can set
+		# '+exec server.cfg' in the command line below. The syntax for the .cfg file
+		# should be like so:
+		# ===============================================================================
+		# // OpenArena Dedicated Server Configuration
+		# set sv_hostname "OpenArena Server"
+		# set sv_maxclients 16
+		# set g_gametype 0          // 0: FFA, 1: Tourney, 3: TDM, 4: CTF, 8: Elimination
+		# set fraglimit 20
+		# set timelimit 15
+		# set sv_allowDownload 1
+		#
+		# // Map Rotation
+		# set d1 "map oa_dm1; set nextmap v_d2"
+		# set d2 "map oa_dm2; set nextmap v_d3"
+		# set d3 "map oa_dm3; set nextmap v_d1"
+		# v_d1
+		# ===============================================================================
+		# For more info regarding the server configuration file, read some of the
+		# articles listed on https://openarena.fandom.com/wiki/Servers#Server_Setup. 
+		exec 2>&1
+		exec /opt/OpenArena/oa_ded +set fs_basepath /opt/OpenArena +set dedicated 1
+	EOF
+	chmod 755 etc/sv/openarena-server/run
+}
+
+do_install() {
+	vcopy "*" /
+	
+}
