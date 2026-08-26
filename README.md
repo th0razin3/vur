@@ -9,6 +9,7 @@ Currently, this repository holds the following templates.
 - Nero Linux 4 (Nero Burning ROM for Linux)
 - numen
 - ocenaudio
+- OpenArena
 - OpenBoard
 - Pale Moon (GTK2 and GTK3)
 - PreSonus Studio One
