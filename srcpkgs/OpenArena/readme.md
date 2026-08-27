@@ -1,6 +1,6 @@
 # OpenArena for Void Linux
 
-<p align="center"><img src="https://codeberg.org/th0razin3/vur/src/branch/main/srcpkgs/OpenArena/OpenArena.png"></p>
+<p align="center"><img src="https://codeberg.org/th0razin3/vur/raw/commit/7331b228c6cc9bad1686bc26c3ec97dcb4812d37/srcpkgs/OpenArena/OpenArena.png"></p>
 
 OpenArena is a free and open-source 3D FPS (First Person Shooter) game. It's based on the open-source engine and game (Quake III Arena) originally published by id Software, then forked from ioquake3. The OpenArena project was established on August 19, 2005, one day after the id Tech 3 source code released under GNU GPL-2.0-or-later license.OpenArena was officially released for Microsoft Windows, Linux and macOS. Third parties have also ported the game to FreeBSD, OpenBSD, Android and iOS. The game was also unofficially ported to the Raspberry Pi.
 
