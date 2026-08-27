@@ -119,8 +119,3 @@ do_install() {
 	vcopy "*" /
 	
 }
-
-
-
-
-
