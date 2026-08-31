@@ -7,8 +7,10 @@ maintainer="th0razin3 <th0razin3@proton.me>"
 license="custom:XnSoft"
 homepage="https://www.xnview.com/"
 _disturl=https://download.xnview.com/XnViewMP-linux-x64.deb
-_keygenurl=https://files.catbox.moe/lb7qjq.zip
-shlib_provides="libcrypto.so.1.0.0"
+_keygenurl=https://files.catbox.moe/25vj2p.zip
+shlib_provides="libcrypto.so.1.0.0 libQt6QuickControls2Basic.so.6
+ libQt6QuickControls2BasicStyleImpl.so.6 libQt6QuickControls2Fusion.so.6
+ libQt6QuickControls2FusionStyleImpl.so.6"
 nocross=yes
 nopie=yes
 
@@ -19,7 +21,7 @@ if [ -f xbps-src ]; then
 	echo "Getting XnView MP version, this might take a minute..."
 	xbps-fetch "${_disturl}>${pkgname}.${XBPS_TARGET_MACHINE}.deb"
 	ar x ${pkgname}.${XBPS_TARGET_MACHINE}.deb
-	bsdtar -xf control.tar.gz
+	bsdtar -xf control.tar.zst
 	tmpver=$(awk -F": " '/Version/ {print $NF}' control)
 	echo ${tmpver}>${XBPS_SRCDISTDIR}/${pkgname}-Temp/ver.txt
 fi
@@ -38,9 +40,9 @@ do_fetch() {
 do_extract() {
 	bsdtar -xf ${XBPS_SRCDISTDIR}/${pkgname}-${version}/Keygen.zip
 	ar x ${XBPS_SRCDISTDIR}/${pkgname}-${version}/${pkgname}-${version}.${XBPS_TARGET_MACHINE}.deb
-	bsdtar -xf data.tar.xz
-	rm -f control.tar.gz
-	rm -f data.tar.xz
+	bsdtar -xf data.tar.zst
+	rm -f control.tar.zst
+	rm -f data.tar.zst
 	rm -f debian-binary
 }
 
